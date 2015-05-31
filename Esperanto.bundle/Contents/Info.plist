@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>CFBundlePackageType</key>
+    <string>BNDL</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.apple.keyboardlayout.Esperanto</string>
+    <key>CFBundleName</key>
+    <string>Esperanto</string>
+    <key>CFBundleVersion</key>
+    <string>1.0.0</string>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CSResourcesFileMapped</key>
+    <true/>
+    <key>LSMinimumSystemVersion</key>
+    <string>10.2.0</string>
+    <key>KLInfo_Esperanto</key>
+    <dict>
+      <key>TISInputSourceID</key>
+      <string>jakwings.keylayout.Esperanto</string>
+      <key>TISIntendedLanguage</key>
+      <string>eo</string>
+    </dict>
+    <key>KLInfo_Esperanto_UK</key>
+    <dict>
+      <key>TISInputSourceID</key>
+      <string>jakwings.keylayout.Esperanto_UK</string>
+      <key>TISIntendedLanguage</key>
+      <string>eo</string>
+    </dict>
+  </dict>
+</plist>
