@@ -9,7 +9,7 @@
     <key>CFBundleName</key>
     <string>Esperanto</string>
     <key>CFBundleVersion</key>
-    <string>1.0.0</string>
+    <string>2.0.0</string>
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleDevelopmentRegion</key>
@@ -20,10 +20,10 @@
     <true/>
     <key>LSMinimumSystemVersion</key>
     <string>10.2.0</string>
-    <key>KLInfo_Esperanto</key>
+    <key>KLInfo_Esperanto_US</key>
     <dict>
       <key>TISInputSourceID</key>
-      <string>jakwings.keylayout.Esperanto</string>
+      <string>jakwings.keylayout.Esperanto_US</string>
       <key>TISIntendedLanguage</key>
       <string>eo</string>
     </dict>
