@@ -38,7 +38,8 @@ Features:
 
 License:
 
-  Copyright © 2015 Jak Wings. All rights reserved.
+  Copyright © 2015 Jak Wings
+  All files are released to the public domain.
 
   "Flag of Esperanto" by Gabriel Ehrnst Grundin
   Licensed under Public Domain via Wikimedia Commons
