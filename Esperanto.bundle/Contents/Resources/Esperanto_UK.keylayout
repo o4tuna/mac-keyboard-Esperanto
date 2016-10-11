@@ -51,7 +51,7 @@
   -
   - See: https://developer.apple.com/library/mac/technotes/tn2056/_index.html
   -->
-<keyboard group="0" id="2015" maxout="1" name="Esperanto_UK"><!-- { -->
+<keyboard group="0" id="2016" maxout="1" name="Esperanto_UK"><!-- { -->
 
   <!--
     - <layout> elements collectively define which <modifierMap> and <keyMapSet>
