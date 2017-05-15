@@ -10,9 +10,11 @@ Installation:
 
   Just drop Esperanto.bundle in the directory ~/Library/Keyboard Layouts
   "~" is your home directory. (e.g. /Users/ada)
+
   If this is not your first time to install these keyboard layouts, remove the
-  old layouts first. Next, logout and login again. Finally, check the system
-  preferences and add this layout. Enjoy! :-)
+  old layouts first. Next, logout and login again, and reinstall.
+
+  Finally, check the system preferences and add this layout. Enjoy! :-)
 
 
 Features:
@@ -39,6 +41,7 @@ Features:
 License:
 
   Copyright © 2015 Jak Wings
+  License: Creative Commons Zero v1.0 Universal
   All files are released to the public domain.
 
   "Flag of Esperanto" by Gabriel Ehrnst Grundin
@@ -46,4 +49,4 @@ License:
   https://commons.wikimedia.org/wiki/File:Flag_of_Esperanto.svg
 
 
-Last update: Jun. 7, 2015
+Last update: May 15, 2017

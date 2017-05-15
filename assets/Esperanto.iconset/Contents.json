@@ -47,10 +47,23 @@
       "idiom" : "mac",
       "filename" : "icon_256x256@2x.png",
       "scale" : "2x"
+    },
+    {
+      "size" : "512x512",
+      "idiom" : "mac",
+      "filename" : "icon_512x512.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "512x512",
+      "idiom" : "mac",
+      "filename" : "icon_512x512@2x.png",
+      "scale" : "2x"
     }
   ],
   "info" : {
     "version" : 1,
-    "author" : "Jak Wings"
+    "author" : "Jak Wings",
+    "license" : "Public Domain"
   }
 }
