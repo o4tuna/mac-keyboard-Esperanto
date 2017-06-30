@@ -47,6 +47,3 @@ License:
   "Flag of Esperanto" by Gabriel Ehrnst Grundin
   Licensed under Public Domain via Wikimedia Commons
   https://commons.wikimedia.org/wiki/File:Flag_of_Esperanto.svg
-
-
-Last update: May 15, 2017
