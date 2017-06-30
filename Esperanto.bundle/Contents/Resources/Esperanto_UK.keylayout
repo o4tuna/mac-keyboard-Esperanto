@@ -34,7 +34,7 @@
   -   Copyright © 2015 Jak Wings
   -   All files are released to the public domain.
   -
-  - Last update: Aug. 24, 2016
+  - Last update: June 30, 2017
   -->
 
 <!--
@@ -210,7 +210,7 @@
       <key code="114" output="&#xF746;"/><!-- Help: Insert -->
       <key code="115" output="&#xF729;"/><!-- Home -->
       <key code="116" output="&#xF72C;"/><!-- PageUp -->
-      <key code="117" output="&#x007F;"/><!-- ForwardDelete -->
+      <key code="117" output="&#xF728;"/><!-- ForwardDelete -->
       <key code="118" output="&#xF707;"/><!-- F4 -->
       <key code="119" output="&#xF72B;"/><!-- End -->
       <key code="120" output="&#xF705;"/><!-- F2 -->
@@ -355,7 +355,7 @@
       <key code="114" output="&#xF746;"/><!-- Help: Insert -->
       <key code="115" output="&#xF729;"/><!-- Home -->
       <key code="116" output="&#xF72C;"/><!-- PageUp -->
-      <key code="117" output="&#x007F;"/><!-- ForwardDelete -->
+      <key code="117" output="&#xF728;"/><!-- ForwardDelete -->
       <key code="118" output="&#xF707;"/><!-- F4 -->
       <key code="119" output="&#xF72B;"/><!-- End -->
       <key code="120" output="&#xF705;"/><!-- F2 -->
@@ -612,7 +612,7 @@
       <key code="114" output="&#xF746;"/><!-- Help: Insert -->
       <key code="115" output="&#xF729;"/><!-- Home -->
       <key code="116" output="&#xF72C;"/><!-- PageUp -->
-      <key code="117" output="&#x007F;"/><!-- ForwardDelete -->
+      <key code="117" output="&#xF728;"/><!-- ForwardDelete -->
       <key code="118" output="&#xF707;"/><!-- F4 -->
       <key code="119" output="&#xF72B;"/><!-- End -->
       <key code="120" output="&#xF705;"/><!-- F2 -->
