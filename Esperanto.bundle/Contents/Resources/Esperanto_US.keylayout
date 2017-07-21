@@ -34,7 +34,7 @@
   -   Copyright © 2015 Jak Wings
   -   All files are released to the public domain.
   -
-  - Last update: June 30, 2017
+  - Last update: July 21, 2017
   -->
 
 <!--
@@ -99,11 +99,7 @@
   <modifierMap id="SpecialModifiers" defaultIndex="0"><!-- { -->
     <!-- Special Keys -->
     <keyMapSelect mapIndex="0">
-      <modifier keys="anyOption? anyControl? command? caps?"/>
-    </keyMapSelect>
-    <!-- Shifted Special Keys -->
-    <keyMapSelect mapIndex="1">
-      <modifier keys="anyShift anyOption? anyControl? command? caps?"/>
+      <modifier keys="anyShift? anyOption? anyControl? command? caps?"/>
     </keyMapSelect>
   </modifierMap>
   <modifierMap id="CommonModifiers" defaultIndex="0">
@@ -125,14 +121,18 @@
     </keyMapSelect>
     <!-- Use Alternative Characters -->
     <keyMapSelect mapIndex="4">
-      <modifier keys="anyOption caps?"/>
+      <modifier keys="anyOption"/>
+    </keyMapSelect>
+    <!-- Use Partly-Shifted Alternative Characters -->
+    <keyMapSelect mapIndex="5">
+      <modifier keys="anyOption caps"/>
     </keyMapSelect>
     <!-- Use Shifted Alternative Characters -->
-    <keyMapSelect mapIndex="5">
+    <keyMapSelect mapIndex="6">
       <modifier keys="anyShift anyOption caps?"/>
     </keyMapSelect>
     <!-- Document Shortcuts -->
-    <keyMapSelect mapIndex="6">
+    <keyMapSelect mapIndex="7">
       <modifier keys="anyShift? anyOption? anyControl caps?"/>
     </keyMapSelect>
   </modifierMap><!-- } -->
@@ -168,6 +168,7 @@
     -   output: ? ~ The text to output unconditionally when the key is pressed.
     -             ~ Unicode characters outside plane 0 must be specified by an
     -             ~ XML numeric character entity.
+    -             ~ See: http://cldr.unicode.org/index/charts/keyboards
     -   action: ? ~ The identifier of the action to trigger.
     -->
   <keyMapSet id="SpecialKeymaps"><!-- { -->
@@ -221,20 +222,10 @@
       <key code="125" output="&#xF701;"/><!-- DownArrow -->
       <key code="126" output="&#xF700;"/><!-- UpArrow -->
       <!-- } -->
-      <!-- These keycodes are for ISO keyboards only. { -->
-      <key code="10" output="§"/><!-- Section -->
-      <!-- } -->
       <!-- These keycodes are for JIS keyboards only. { -->
-      <key code="93" output="¥"/><!-- Yen -->
-      <key code="94" output="_"/><!-- Underscore -->
-      <key code="95" output=","/><!-- KeypadComma -->
       <key code="102" output=""/><!-- Eisu -->
       <key code="104" output=""/><!-- Kana -->
       <!-- } -->
-    </keyMap><!-- } -->
-    <keyMap index="1" baseMapSet="SpecialKeymaps" baseIndex="0"><!-- { -->
-      <key code="10" output="±"/><!-- Section -->
-      <key code="93" output="|"/><!-- Yen -->
     </keyMap><!-- } -->
   </keyMapSet><!-- } -->
   <keyMapSet id="CommonKeymaps"><!-- { -->
@@ -320,7 +311,7 @@
       <!-- These keycodes are independent of keyboard layouts. { -->
       <key code="36" output="&#x000D;"/><!-- Return -->
       <key code="48" action="Tab"/><!-- Tab -->
-      <key code="49" output="&#x0020;"/><!-- Space -->
+      <key code="49" action="SoftSpace"/><!-- Space -->
       <key code="51" output="&#x007F;"/><!-- Delete -->
       <key code="53" output="&#x001B;"/><!-- Escape -->
       <key code="55" output=""/><!-- Command -->
@@ -536,7 +527,7 @@
       <!-- skip 36 -->
       <key code="37" output="¬"/><!-- L -->
       <key code="38" output="∆"/><!-- J -->
-      <key code="39" action="æ"/><!-- Quote -->
+      <key code="39" output="æ"/><!-- Quote -->
       <key code="40" action="Ring"/><!-- K -->
       <key code="41" output="…"/><!-- Semicolon -->
       <key code="42" output="«"/><!-- Backslash -->
@@ -577,7 +568,7 @@
       <!-- These keycodes are independent of keyboard layouts. { -->
       <key code="36" output="&#x000D;"/><!-- Return -->
       <key code="48" action="Tab"/><!-- Tab -->
-      <key code="49" output="&#x00A0;"/><!-- Space -->
+      <key code="49" action="HardSpace"/><!-- Space -->
       <key code="51" output="&#x007F;"/><!-- Delete -->
       <key code="53" output="&#x001B;"/><!-- Escape -->
       <key code="55" output=""/><!-- Command -->
@@ -627,14 +618,34 @@
       <key code="10" output="§"/><!-- Section -->
       <!-- } -->
       <!-- These keycodes are for JIS keyboards only. { -->
-      <key code="93" output="¥"/><!-- Yen -->
-      <key code="94" output="_"/><!-- Underscore -->
+      <key code="93" output="\"/><!-- Yen -->
+      <key code="94" action="Grave"/><!-- Underscore -->
       <key code="95" output=","/><!-- KeypadComma -->
       <key code="102" output=""/><!-- Eisu -->
       <key code="104" output=""/><!-- Kana -->
       <!-- } -->
     </keyMap><!-- } -->
     <keyMap index="5" baseMapSet="CommonKeymaps" baseIndex="4"><!-- { -->
+      <key code="0" output="Å"/><!-- A -->
+      <key code="1" output="Í"/><!-- S -->
+      <key code="2" output="Î"/><!-- D -->
+      <key code="3" output="Ï"/><!-- F -->
+      <key code="4" output="Ó"/><!-- H -->
+      <key code="8" output="Ç"/><!-- C -->
+      <key code="11" output="ı"/><!-- B -->
+      <key code="12" output="Œ"/><!-- Q -->
+      <key code="16" output="Á"/><!-- Y -->
+      <key code="31" output="Ø"/><!-- O -->
+      <key code="35" output="∏"/><!-- P -->
+      <key code="37" output="Ò"/><!-- L -->
+      <key code="38" output="Ô"/><!-- J -->
+      <key code="46" output="Â"/><!-- M -->
+      <key code="39" output="Æ"/><!-- Quote -->
+      <!-- These keycodes are for JIS keyboards only. { -->
+      <key code="93" output="«"/><!-- Yen -->
+      <!-- } -->
+    </keyMap><!-- } -->
+    <keyMap index="6" baseMapSet="CommonKeymaps" baseIndex="4"><!-- { -->
       <key code="0" output="Å"/><!-- A -->
       <key code="1" output="Í"/><!-- S -->
       <key code="2" output="Î"/><!-- D -->
@@ -672,7 +683,7 @@
       <key code="35" output="∏"/><!-- P -->
       <key code="37" output="Ò"/><!-- L -->
       <key code="38" output="Ô"/><!-- J -->
-      <key code="39" action="Æ"/><!-- Quote -->
+      <key code="39" output="Æ"/><!-- Quote -->
       <key code="40" output=""/><!-- K -->
       <key code="41" output="Ú"/><!-- Semicolon -->
       <key code="42" output="»"/><!-- Backslash -->
@@ -682,8 +693,14 @@
       <key code="46" output="Â"/><!-- M -->
       <key code="47" action="Breve"/><!-- Period -->
       <key code="50" action="Grave"/><!-- Grave -->
+      <!-- These keycodes are for ISO keyboards only. { -->
+      <key code="10" output="±"/><!-- Section -->
+      <!-- } -->
+      <!-- These keycodes are for JIS keyboards only. { -->
+      <key code="93" output="»"/><!-- Yen -->
+      <!-- } -->
     </keyMap><!-- } -->
-    <keyMap index="6" baseMapSet="SpecialKeymaps" baseIndex="0"><!-- { -->
+    <keyMap index="7" baseMapSet="SpecialKeymaps" baseIndex="0"><!-- { -->
       <key code="0" output="&#x0001;"/><!-- A -->
       <key code="1" output="&#x0013;"/><!-- S -->
       <key code="2" output="&#x0004;"/><!-- D -->
@@ -710,6 +727,14 @@
       <key code="40" output="&#x000B;"/><!-- K -->
       <key code="45" output="&#x000E;"/><!-- N -->
       <key code="46" output="&#x000D;"/><!-- M -->
+      <key code="27" output="&#x001F;"/><!-- Minus -->
+      <key code="30" output="&#x001D;"/><!-- RightBracket -->
+      <key code="33" output="&#x001B;"/><!-- LeftBracket -->
+      <key code="42" output="&#x001C;"/><!-- Backslash -->
+      <key code="49" output="&#x0000;"/><!-- Space -->
+      <!-- These keycodes are for ISO keyboards only. { -->
+      <key code="10" output="0"/><!-- Section -->
+      <!-- } -->
     </keyMap><!-- } -->
   </keyMapSet><!-- } -->
 
@@ -749,7 +774,6 @@
     - error occurs.
     -->
   <actions><!-- { -->
-    <!-- Latin Letters { -->
     <action id="Grave">
       <when state="none" next="Grave"/>
       <when state="Grave" next="Double Grave"/>
@@ -811,6 +835,9 @@
     </action>
     <action id="Ogonek">
       <when state="none" next="Ogonek"/>
+    </action>
+    <action id="Double Grave">
+      <when state="none" next="Double Grave"/>
     </action>
     <action id="Double Acute">
       <when state="none" next="Double Acute"/>
@@ -1322,17 +1349,86 @@
       <when state="Dot" output="Ż"/>
       <when state="Caron" output="Ž"/>
     </action>
-    <action id="æ">
-      <when state="none" output="æ"/>
-      <when state="Acute" output="ǽ"/>
-      <when state="Macron" output="ǣ"/>
+    <action id="SoftSpace">
+      <when state="none" output="&#x0020;"/>
+      <when state="Grave" output="&#x00A0;&#x0300;"/>
+      <when state="Acute" output="&#x00A0;&#x0301;"/>
+      <when state="Circumflex" output="&#x00A0;&#x0302;"/>
+      <when state="Tilde" output="&#x00A0;&#x0303;"/>
+      <when state="Diaeresis" output="&#x00A0;&#x0308;"/>
+      <when state="Macron" output="&#x00A0;&#x0304;"/>
+      <when state="Breve" output="&#x00A0;&#x0306;"/>
+      <when state="Dot" output="&#x00A0;&#x0307;"/>
+      <when state="Ring" output="&#x00A0;&#x030A;"/>
+      <when state="Caron" output="&#x00A0;&#x030C;"/>
+      <when state="Cedilla" output="&#x00A0;&#x0327;"/>
+      <when state="Ogonek" output="&#x00A0;&#x0328;"/>
+      <when state="Double Grave" output="&#x00A0;&#x030F;"/>
+      <when state="Double Acute" output="&#x00A0;&#x030B;"/>
+      <when state="Acute and Dot" output="&#x00A0;&#x0301;&#x0307;"/>
+      <when state="Circumflex and Grave" output="&#x00A0;&#x0302;&#x0300;"/>
+      <when state="Circumflex and Acute" output="&#x00A0;&#x0302;&#x0301;"/>
+      <when state="Circumflex and Tilde" output="&#x00A0;&#x0302;&#x0303;"/>
+      <when state="Tilde and Acute" output="&#x00A0;&#x0303;&#x0301;"/>
+      <when state="Tilde and Diaeresis" output="&#x00A0;&#x0303;&#x0308;"/>
+      <when state="Tilde and Macron" output="&#x00A0;&#x0303;&#x0304;"/>
+      <when state="Diaeresis and Grave" output="&#x00A0;&#x0308;&#x0300;"/>
+      <when state="Diaeresis and Acute" output="&#x00A0;&#x0308;&#x0301;"/>
+      <when state="Diaeresis and Macron" output="&#x00A0;&#x0308;&#x0304;"/>
+      <when state="Diaeresis and Caron" output="&#x00A0;&#x0308;&#x030C;"/>
+      <when state="Macron and Grave" output="&#x00A0;&#x0304;&#x0300;"/>
+      <when state="Macron and Acute" output="&#x00A0;&#x0304;&#x0301;"/>
+      <when state="Macron and Diaeresis" output="&#x00A0;&#x0304;&#x0308;"/>
+      <when state="Breve and Grave" output="&#x00A0;&#x0306;&#x0300;"/>
+      <when state="Breve and Acute" output="&#x00A0;&#x0306;&#x0301;"/>
+      <when state="Breve and Tilde" output="&#x00A0;&#x0306;&#x0303;"/>
+      <when state="Dot and Macron" output="&#x00A0;&#x0307;&#x0304;"/>
+      <when state="Ring and Acute" output="&#x00A0;&#x030A;&#x0301;"/>
+      <when state="Caron and Dot" output="&#x00A0;&#x030C;&#x0307;"/>
+      <when state="Cedilla and Acute" output="&#x00A0;&#x0327;&#x0301;"/>
+      <when state="Cedilla and Breve" output="&#x00A0;&#x0327;&#x0306;"/>
+      <when state="Ogonek and Macron" output="&#x00A0;&#x0328;&#x0304;"/>
     </action>
-    <action id="Æ">
-      <when state="none" output="Æ"/>
-      <when state="Acute" output="Ǽ"/>
-      <when state="Macron" output="Ǣ"/>
+    <action id="HardSpace">
+      <when state="none" output="&#x00A0;"/>
+      <when state="Grave" output="&#x00A0;&#x0300;"/>
+      <when state="Acute" output="&#x00A0;&#x0301;"/>
+      <when state="Circumflex" output="&#x00A0;&#x0302;"/>
+      <when state="Tilde" output="&#x00A0;&#x0303;"/>
+      <when state="Diaeresis" output="&#x00A0;&#x0308;"/>
+      <when state="Macron" output="&#x00A0;&#x0304;"/>
+      <when state="Breve" output="&#x00A0;&#x0306;"/>
+      <when state="Dot" output="&#x00A0;&#x0307;"/>
+      <when state="Ring" output="&#x00A0;&#x030A;"/>
+      <when state="Caron" output="&#x00A0;&#x030C;"/>
+      <when state="Cedilla" output="&#x00A0;&#x0327;"/>
+      <when state="Ogonek" output="&#x00A0;&#x0328;"/>
+      <when state="Double Grave" output="&#x00A0;&#x030F;"/>
+      <when state="Double Acute" output="&#x00A0;&#x030B;"/>
+      <when state="Acute and Dot" output="&#x00A0;&#x0301;&#x0307;"/>
+      <when state="Circumflex and Grave" output="&#x00A0;&#x0302;&#x0300;"/>
+      <when state="Circumflex and Acute" output="&#x00A0;&#x0302;&#x0301;"/>
+      <when state="Circumflex and Tilde" output="&#x00A0;&#x0302;&#x0303;"/>
+      <when state="Tilde and Acute" output="&#x00A0;&#x0303;&#x0301;"/>
+      <when state="Tilde and Diaeresis" output="&#x00A0;&#x0303;&#x0308;"/>
+      <when state="Tilde and Macron" output="&#x00A0;&#x0303;&#x0304;"/>
+      <when state="Diaeresis and Grave" output="&#x00A0;&#x0308;&#x0300;"/>
+      <when state="Diaeresis and Acute" output="&#x00A0;&#x0308;&#x0301;"/>
+      <when state="Diaeresis and Macron" output="&#x00A0;&#x0308;&#x0304;"/>
+      <when state="Diaeresis and Caron" output="&#x00A0;&#x0308;&#x030C;"/>
+      <when state="Macron and Grave" output="&#x00A0;&#x0304;&#x0300;"/>
+      <when state="Macron and Acute" output="&#x00A0;&#x0304;&#x0301;"/>
+      <when state="Macron and Diaeresis" output="&#x00A0;&#x0304;&#x0308;"/>
+      <when state="Breve and Grave" output="&#x00A0;&#x0306;&#x0300;"/>
+      <when state="Breve and Acute" output="&#x00A0;&#x0306;&#x0301;"/>
+      <when state="Breve and Tilde" output="&#x00A0;&#x0306;&#x0303;"/>
+      <when state="Dot and Macron" output="&#x00A0;&#x0307;&#x0304;"/>
+      <when state="Ring and Acute" output="&#x00A0;&#x030A;&#x0301;"/>
+      <when state="Caron and Dot" output="&#x00A0;&#x030C;&#x0307;"/>
+      <when state="Cedilla and Acute" output="&#x00A0;&#x0327;&#x0301;"/>
+      <when state="Cedilla and Breve" output="&#x00A0;&#x0327;&#x0306;"/>
+      <when state="Ogonek and Macron" output="&#x00A0;&#x0328;&#x0304;"/>
     </action>
-    <!-- } Latin Letters -->
     <action id="Tab"><!-- { -->
       <when state="none" output="&#x0009;"/>
       <when state="Grave" output="&#x0060;"/>
@@ -1395,7 +1491,6 @@
     - a particular state, the default is to return to the base (default) state.
     -->
   <terminators><!-- { -->
-    <!-- Latin Letters { -->
     <when state="Grave" output="&#x0060;"/>
     <when state="Acute" output="&#x00B4;"/>
     <when state="Circumflex" output="&#x02C6;"/>
@@ -1408,8 +1503,8 @@
     <when state="Caron" output="&#x02C7;"/>
     <when state="Cedilla" output="&#x00B8;"/>
     <when state="Ogonek" output="&#x02DB;"/>
-    <when state="Double Grave" output="&#x02F5;"/>
-    <when state="Double Acute" output="&#x02DD;"/>
+    <when state="Double Grave" output="&#x0060;&#x0060;"/>
+    <when state="Double Acute" output="&#x00B4;&#x00B4;"/>
     <when state="Acute and Dot" output="&#x00B4;&#x02D9;"/>
     <when state="Circumflex and Grave" output="&#x02C6;&#x0060;"/>
     <when state="Circumflex and Acute" output="&#x02C6;&#x00B4;"/>
@@ -1445,7 +1540,6 @@
     <when state="S" output="S"/>
     <when state="u" output="u"/>
     <when state="U" output="U"/>
-    <!-- } Latin Letters -->
   </terminators><!-- } -->
 
 </keyboard><!-- } -->
