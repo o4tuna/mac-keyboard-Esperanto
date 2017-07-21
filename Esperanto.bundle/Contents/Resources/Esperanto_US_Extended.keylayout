@@ -1,0 +1,1971 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE keyboard SYSTEM "file://localhost/System/Library/DTDs/KeyboardLayout.dtd">
+<!--
+  - A super convenient keyboard layout schema for the Esperanto language.
+  -
+  - Homepage:
+  -   https://github.com/jakwings/mac-keyboard-Esperanto
+  -
+  - Installation:
+  -   Just drop it in the directory ~/Library/Keyboard Layouts
+  -   "~" is your home directory. (e.g. /Users/ada)
+  -   Then in the system preferences add this layout from the Other section.
+  -
+  - Features:
+  -   * Based on the US Extended layout of the English Apple keyboard.
+  -   * More latin letters from the combinations of accents and letters.
+  -   * Support the x-system:
+  -       c + x/X = ĉ, C + x/X = Ĉ
+  -       g + x/X = ĝ, G + x/X = Ĝ
+  -       h + x/X = ĥ, H + x/X = Ĥ
+  -       j + x/X = ĵ, J + x/X = Ĵ
+  -       s + x/X = ŝ, S + x/X = Ŝ
+  -       u + x/X = ŭ, U + x/X = Ŭ
+  -   * Use ESC or Tab or irrelevant keys to cancel any incomplete combination:
+  -       c + Tab = c, C + Tab = C
+  -       g + Tab = g, G + Tab = G
+  -       h + Tab = h, H + Tab = H
+  -       j + Tab = j, J + Tab = J
+  -       s + Tab = s, S + Tab = S
+  -       u + Tab = u, U + Tab = U
+  -       S + u + g + a + r + c + o + a + t + i + n + g + . = Sugarcoating.
+  -
+  - License:
+  -   Copyright © 2017 Jak Wings
+  -   All files are released to the public domain.
+  -
+  - Last update: July 21, 2017
+  -->
+
+<!--
+  - The root element: keyboard
+  -
+  - Attributes of <keyboard>:
+  -   group: 0        ~ The script code of the keyboard:
+  -                   ~   Roman (0), Japanese (1), Traditional Chinese (2),
+  -                   ~   Korean (3), Cyrillic (7), Central European (29),
+  -                   ~   Unicode (126)
+  -   id: 2015        ~ Unicode keyboards must have negative IDs.
+  -   maxout: 1       ~ The maximum number of UTF-16 values from one keypress.
+  -   name: Esperanto ~ https://en.wikipedia.org/wiki/Esperanto
+  -
+  - See: https://developer.apple.com/library/mac/technotes/tn2056/_index.html
+  -->
+<keyboard group="0" id="2017" maxout="1" name="Esperanto_US_Extended"><!-- { -->
+
+  <!--
+    - <layout> elements collectively define which <modifierMap> and <keyMapSet>
+    - elements control the mapping of keys for particular hardware keyboards.
+    -
+    - Attributes of <layout>:
+    -   first: 0      ~ The hardware ID of the first keyboard type.
+    -   last: 0       ~ The hardware ID of the last keyboard type.
+    -   modifiers: ?  ~ The identifier of the <modifierMap> element to use.
+    -   mapSet: ?     ~ The identifier of the <mapSet> element to use.
+    -->
+  <layouts><!-- { -->
+    <layout first="0" last="0" modifiers="CommonModifiers" mapSet="CommonKeymaps"/>
+  </layouts><!-- } -->
+
+  <!--
+    - Each <modifierMap> element defines the mapping of modifier key
+    - combinations to <keyMap> table numbers. The element contains one or more
+    - <keyMapSelect> elements, each of which correspond to one <keyMap> table.
+    -
+    - Attributes of <modifierMap>:
+    -   id: ?           ~ A unique identifier across all <modifierMap> elements.
+    -   defaultIndex: 0 ~ The default value of mapIndex of <keyMapSelect>.
+    -
+    - Attributes of <keyMapSelect>:
+    -   mapIndex: 0 ~ The <keyMap> table number to use by <modifier> elements.
+    -
+    - Attributes of <modifier>:
+    -   keys: ? ~ A string specifying one or more combinations of modifier keys.
+    -           ~ Keys are separated by whitespace. All valid keys are:
+    -           ~   * shift: The left "shift" key.
+    -           ~   * rightShift: The right "shift" key.
+    -           ~   * anyShift: The left or right "shift" key.
+    -           ~   * option: The left "option" key.
+    -           ~   * rightOption: The right "option" key.
+    -           ~   * anyOption: The left or right "option" key.
+    -           ~   * control: The left "control" key.
+    -           ~   * rightControl: The right "control" key.
+    -           ~   * anyControl: The left or right "control" key.
+    -           ~   * command: The left or right "command" key.
+    -           ~   * caps: The "caps lock" key.
+    -           ~ Optional keys are suffixed with a question mark "?".
+    -           ~ See: https://support.apple.com/en-us/HT201236
+    -->
+  <modifierMap id="SpecialModifiers" defaultIndex="0"><!-- { -->
+    <!-- Special Keys -->
+    <keyMapSelect mapIndex="0">
+      <modifier keys="anyShift? anyOption? anyControl? command? caps?"/>
+    </keyMapSelect>
+  </modifierMap>
+  <modifierMap id="CommonModifiers" defaultIndex="0">
+    <!-- Normal Characters -->
+    <keyMapSelect mapIndex="0">
+      <modifier keys=""/>
+    </keyMapSelect>
+    <!-- Use Upper-case Letters -->
+    <keyMapSelect mapIndex="1">
+      <modifier keys="caps"/>
+    </keyMapSelect>
+    <!-- Use Shifted Characters and Upper-case Letters -->
+    <keyMapSelect mapIndex="2">
+      <modifier keys="anyShift"/>
+    </keyMapSelect>
+    <!-- Use Shifted Characters and Lower-case Letters-->
+    <keyMapSelect mapIndex="3">
+      <modifier keys="anyShift caps"/>
+    </keyMapSelect>
+    <!-- Use Alternative Characters -->
+    <keyMapSelect mapIndex="4">
+      <modifier keys="anyOption"/>
+    </keyMapSelect>
+    <!-- Use Partly-Shifted Alternative Characters -->
+    <keyMapSelect mapIndex="5">
+      <modifier keys="anyOption caps"/>
+    </keyMapSelect>
+    <!-- Use Shifted Alternative Characters -->
+    <keyMapSelect mapIndex="6">
+      <modifier keys="anyShift anyOption caps?"/>
+    </keyMapSelect>
+    <!-- Document Shortcuts -->
+    <keyMapSelect mapIndex="7">
+      <modifier keys="anyShift? anyOption? anyControl caps?"/>
+    </keyMapSelect>
+  </modifierMap><!-- } -->
+
+  <!--
+    - Each <keyMapSet> element collects a set of tables that are used to map
+    - from key presses to results.
+    -
+    - The <keyMap> element specifies a particular mapping from virtual key
+    - codes to results. It contains one or more <key> elements which specify
+    - what to do when a particular virtual key code is received. The size of
+    - the resulting mapping table is determined by the largest virtual key code
+    - specified by any table in the keyMapSet; unspecified entries are filled
+    - with null results (they don't do anything, in other words).
+    -
+    - Attributes of <keyMapSet>:
+    -   id: ? ~ A unique identifier across all <keyMapSet> elements.
+    -
+    - Attributes of <keyMap>:
+    -   index: 0
+    -   baseMapSet: ? ~ The identifier of a <keyMapSet> to use with baseIndex.
+    -   baseIndex: 0  ~ The table number of a <keyMap> within the <keyMapSet>
+    -                 ~ whose id is baseMapSet. The corresponding <keyMap> will
+    -                 ~ be used as the base of this <keyMap>. (No chain effect.)
+    -
+    - Attributes of <key>:
+    -   code: 0   ~ The decimal number of the virtual key code to map. It is
+    -             ~ unique across all <key> elements within the <keyMap>.
+    -             ~ See: /System/Library/Frameworks/Carbon.framework/Frameworks/HIToolbox.framework/Headers/Events.h
+    -             ~ See: https://developer.apple.com/legacy/library/documentation/mac/pdf/MacintoshToolboxEssentials.pdf
+    -             ~ See: https://support.apple.com/en-us/HT201794
+    -             ~ App: https://itunes.apple.com/tr/app/key-codes/id414568915
+    -   output: ? ~ The text to output unconditionally when the key is pressed.
+    -             ~ Unicode characters outside plane 0 must be specified by an
+    -             ~ XML numeric character entity.
+    -             ~ See: http://cldr.unicode.org/index/charts/keyboards
+    -   action: ? ~ The identifier of the action to trigger.
+    -->
+  <keyMapSet id="SpecialKeymaps"><!-- { -->
+    <keyMap index="0"><!-- { -->
+      <!-- These keycodes are independent of keyboard layouts. { -->
+      <key code="36" output="&#x000D;"/><!-- Return -->
+      <key code="48" output="&#x0009;"/><!-- Tab -->
+      <key code="49" output="&#x0020;"/><!-- Space -->
+      <key code="51" output="&#x007F;"/><!-- Delete -->
+      <key code="53" output="&#x001B;"/><!-- Escape -->
+      <key code="55" output=""/><!-- Command -->
+      <key code="56" output=""/><!-- Shift -->
+      <key code="57" output=""/><!-- CapsLock -->
+      <key code="58" output=""/><!-- Option -->
+      <key code="59" output=""/><!-- Control -->
+      <key code="60" output=""/><!-- RightShift -->
+      <key code="61" output=""/><!-- RightOption -->
+      <key code="62" output=""/><!-- RightControl -->
+      <key code="63" output=""/><!-- Function -->
+      <key code="64" output="&#xF714;"/><!-- F17 -->
+      <key code="72" output=""/><!-- VolumeUp -->
+      <key code="73" output=""/><!-- VolumeDown -->
+      <key code="74" output=""/><!-- Mute -->
+      <key code="79" output="&#xF715;"/><!-- F18 -->
+      <key code="80" output="&#xF716;"/><!-- F19 -->
+      <key code="90" output="&#xF717;"/><!-- F20 -->
+      <key code="96" output="&#xF708;"/><!-- F5 -->
+      <key code="97" output="&#xF709;"/><!-- F6 -->
+      <key code="98" output="&#xF70A;"/><!-- F7 -->
+      <key code="99" output="&#xF706;"/><!-- F3 -->
+      <key code="100" output="&#xF70B;"/><!-- F8 -->
+      <key code="101" output="&#xF70C;"/><!-- F9 -->
+      <key code="103" output="&#xF70E;"/><!-- F11 -->
+      <key code="105" output="&#xF710;"/><!-- F13: Print Screen -->
+      <key code="106" output="&#xF713;"/><!-- F16 -->
+      <key code="107" output="&#xF711;"/><!-- F14: Scroll Lock -->
+      <key code="109" output="&#xF70D;"/><!-- F10 -->
+      <key code="111" output="&#xF70F;"/><!-- F12 -->
+      <key code="113" output="&#xF712;"/><!-- F15: Pause/Break -->
+      <key code="114" output="&#xF746;"/><!-- Help: Insert -->
+      <key code="115" output="&#xF729;"/><!-- Home -->
+      <key code="116" output="&#xF72C;"/><!-- PageUp -->
+      <key code="117" output="&#xF728;"/><!-- ForwardDelete -->
+      <key code="118" output="&#xF707;"/><!-- F4 -->
+      <key code="119" output="&#xF72B;"/><!-- End -->
+      <key code="120" output="&#xF705;"/><!-- F2 -->
+      <key code="121" output="&#xF72D;"/><!-- PageDown -->
+      <key code="122" output="&#xF704;"/><!-- F1 -->
+      <key code="123" output="&#xF702;"/><!-- LeftArrow -->
+      <key code="124" output="&#xF703;"/><!-- RightArrow -->
+      <key code="125" output="&#xF701;"/><!-- DownArrow -->
+      <key code="126" output="&#xF700;"/><!-- UpArrow -->
+      <!-- } -->
+      <!-- These keycodes are for JIS keyboards only. { -->
+      <key code="102" output=""/><!-- Eisu -->
+      <key code="104" output=""/><!-- Kana -->
+      <!-- } -->
+    </keyMap><!-- } -->
+  </keyMapSet><!-- } -->
+  <keyMapSet id="CommonKeymaps"><!-- { -->
+    <keyMap index="0"><!-- { -->
+      <!-- These keycodes are dependent on the keyboard layout. { -->
+      <key code="0" action="a"/><!-- A -->
+      <key code="1" action="s"/><!-- S -->
+      <key code="2" action="d"/><!-- D -->
+      <key code="3" action="f"/><!-- F -->
+      <key code="4" action="h"/><!-- H -->
+      <key code="5" action="g"/><!-- G -->
+      <key code="6" action="z"/><!-- Z -->
+      <key code="7" action="x"/><!-- X -->
+      <key code="8" action="c"/><!-- C -->
+      <key code="9" action="v"/><!-- V -->
+      <!-- skip 10 -->
+      <key code="11" action="b"/><!-- B -->
+      <key code="12" action="q"/><!-- Q -->
+      <key code="13" action="w"/><!-- W -->
+      <key code="14" action="e"/><!-- E -->
+      <key code="15" action="r"/><!-- R -->
+      <key code="16" action="y"/><!-- Y -->
+      <key code="17" action="t"/><!-- T -->
+      <key code="18" output="1"/><!-- 1 -->
+      <key code="19" action="#2"/><!-- 2 -->
+      <key code="20" action="#3"/><!-- 3 -->
+      <key code="21" output="4"/><!-- 4 -->
+      <key code="22" action="#6"/><!-- 6 -->
+      <key code="23" action="#5"/><!-- 5 -->
+      <key code="24" output="="/><!-- Equal -->
+      <key code="25" output="9"/><!-- 9 -->
+      <key code="26" action="#7"/><!-- 7 -->
+      <key code="27" output="-"/><!-- Minus -->
+      <key code="28" action="#8"/><!-- 8 -->
+      <key code="29" output="0"/><!-- 0 -->
+      <key code="30" output="]"/><!-- RightBracket -->
+      <key code="31" action="o"/><!-- O -->
+      <key code="32" action="u"/><!-- U -->
+      <key code="33" output="["/><!-- LeftBracket -->
+      <key code="34" action="i"/><!-- I -->
+      <key code="35" action="p"/><!-- P -->
+      <!-- skip 36 -->
+      <key code="37" action="l"/><!-- L -->
+      <key code="38" action="j"/><!-- J -->
+      <key code="39" output="&#x0027;"/><!-- Quote -->
+      <key code="40" action="k"/><!-- K -->
+      <key code="41" output=";"/><!-- Semicolon -->
+      <key code="42" output="\"/><!-- Backslash -->
+      <key code="43" output=","/><!-- Comma -->
+      <key code="44" output="/"/><!-- Slash -->
+      <key code="45" action="n"/><!-- N -->
+      <key code="46" action="m"/><!-- M -->
+      <key code="47" output="."/><!-- Period -->
+      <!-- skip 48-49 -->
+      <key code="50" output="`"/><!-- Grave -->
+      <!-- skip 51-64 -->
+      <key code="65" output="."/><!-- KeypadDecimal -->
+      <!-- skip 66 -->
+      <key code="67" output="*"/><!-- KeypadMultiply -->
+      <!-- skip 68 -->
+      <key code="69" output="+"/><!-- KeypadPlus -->
+      <!-- skip 70 -->
+      <key code="71" output="&#xF739;"/><!-- KeypadClear: Num Lock -->
+      <!-- skip 72-74 -->
+      <key code="75" output="/"/><!-- KeypadDivide -->
+      <key code="76" output="&#x0003;"/><!-- KeypadEnter -->
+      <!-- skip 77 -->
+      <key code="78" output="-"/><!-- KeypadMinus -->
+      <!-- skip 79-80 -->
+      <key code="81" output="="/><!-- KeypadEquals -->
+      <key code="82" output="0"/><!-- Keypad0 -->
+      <key code="83" output="1"/><!-- Keypad1 -->
+      <key code="84" output="2"/><!-- Keypad2 -->
+      <key code="85" output="3"/><!-- Keypad3 -->
+      <key code="86" output="4"/><!-- Keypad4 -->
+      <key code="87" output="5"/><!-- Keypad5 -->
+      <key code="88" output="6"/><!-- Keypad6 -->
+      <key code="89" output="7"/><!-- Keypad7 -->
+      <!-- skip 90 -->
+      <key code="91" output="8"/><!-- Keypad8 -->
+      <key code="92" output="9"/><!-- Keypad9 -->
+      <!-- } -->
+      <!-- These keycodes are independent of keyboard layouts. { -->
+      <key code="36" output="&#x000D;"/><!-- Return -->
+      <key code="48" action="Tab"/><!-- Tab -->
+      <key code="49" action="SoftSpace"/><!-- Space -->
+      <key code="51" output="&#x007F;"/><!-- Delete -->
+      <key code="53" output="&#x001B;"/><!-- Escape -->
+      <key code="55" output=""/><!-- Command -->
+      <key code="56" output=""/><!-- Shift -->
+      <key code="57" output=""/><!-- CapsLock -->
+      <key code="58" output=""/><!-- Option -->
+      <key code="59" output=""/><!-- Control -->
+      <key code="60" output=""/><!-- RightShift -->
+      <key code="61" output=""/><!-- RightOption -->
+      <key code="62" output=""/><!-- RightControl -->
+      <key code="63" output=""/><!-- Function -->
+      <key code="64" output="&#xF714;"/><!-- F17 -->
+      <key code="72" output=""/><!-- VolumeUp -->
+      <key code="73" output=""/><!-- VolumeDown -->
+      <key code="74" output=""/><!-- Mute -->
+      <key code="79" output="&#xF715;"/><!-- F18 -->
+      <key code="80" output="&#xF716;"/><!-- F19 -->
+      <key code="90" output="&#xF717;"/><!-- F20 -->
+      <key code="96" output="&#xF708;"/><!-- F5 -->
+      <key code="97" output="&#xF709;"/><!-- F6 -->
+      <key code="98" output="&#xF70A;"/><!-- F7 -->
+      <key code="99" output="&#xF706;"/><!-- F3 -->
+      <key code="100" output="&#xF70B;"/><!-- F8 -->
+      <key code="101" output="&#xF70C;"/><!-- F9 -->
+      <key code="103" output="&#xF70E;"/><!-- F11 -->
+      <key code="105" output="&#xF710;"/><!-- F13: Print Screen -->
+      <key code="106" output="&#xF713;"/><!-- F16 -->
+      <key code="107" output="&#xF711;"/><!-- F14: Scroll Lock -->
+      <key code="109" output="&#xF70D;"/><!-- F10 -->
+      <key code="111" output="&#xF70F;"/><!-- F12 -->
+      <key code="113" output="&#xF712;"/><!-- F15: Pause/Break -->
+      <key code="114" output="&#xF746;"/><!-- Help: Insert -->
+      <key code="115" output="&#xF729;"/><!-- Home -->
+      <key code="116" output="&#xF72C;"/><!-- PageUp -->
+      <key code="117" output="&#xF728;"/><!-- ForwardDelete -->
+      <key code="118" output="&#xF707;"/><!-- F4 -->
+      <key code="119" output="&#xF72B;"/><!-- End -->
+      <key code="120" output="&#xF705;"/><!-- F2 -->
+      <key code="121" output="&#xF72D;"/><!-- PageDown -->
+      <key code="122" output="&#xF704;"/><!-- F1 -->
+      <key code="123" output="&#xF702;"/><!-- LeftArrow -->
+      <key code="124" output="&#xF703;"/><!-- RightArrow -->
+      <key code="125" output="&#xF701;"/><!-- DownArrow -->
+      <key code="126" output="&#xF700;"/><!-- UpArrow -->
+      <!-- } -->
+      <!-- These keycodes are for ISO keyboards only. { -->
+      <key code="10" output="§"/><!-- Section -->
+      <!-- } -->
+      <!-- These keycodes are for JIS keyboards only. { -->
+      <key code="93" output="¥"/><!-- Yen -->
+      <key code="94" output="_"/><!-- Underscore -->
+      <key code="95" output=","/><!-- KeypadComma -->
+      <key code="102" output=""/><!-- Eisu -->
+      <key code="104" output=""/><!-- Kana -->
+      <!-- } -->
+    </keyMap><!-- } -->
+    <keyMap index="1" baseMapSet="CommonKeymaps" baseIndex="0"><!-- { -->
+      <!-- These keycodes are dependent on the keyboard layout. { -->
+      <key code="0" action="A"/><!-- A -->
+      <key code="1" action="S"/><!-- S -->
+      <key code="2" action="D"/><!-- D -->
+      <key code="3" action="F"/><!-- F -->
+      <key code="4" action="H"/><!-- H -->
+      <key code="5" action="G"/><!-- G -->
+      <key code="6" action="Z"/><!-- Z -->
+      <key code="7" action="X"/><!-- X -->
+      <key code="8" action="C"/><!-- C -->
+      <key code="9" action="V"/><!-- V -->
+      <key code="11" action="B"/><!-- B -->
+      <key code="12" action="Q"/><!-- Q -->
+      <key code="13" action="W"/><!-- W -->
+      <key code="14" action="E"/><!-- E -->
+      <key code="15" action="R"/><!-- R -->
+      <key code="16" action="Y"/><!-- Y -->
+      <key code="17" action="T"/><!-- T -->
+      <key code="31" action="O"/><!-- O -->
+      <key code="32" action="U"/><!-- U -->
+      <key code="34" action="I"/><!-- I -->
+      <key code="35" action="P"/><!-- P -->
+      <key code="37" action="L"/><!-- L -->
+      <key code="38" action="J"/><!-- J -->
+      <key code="40" action="K"/><!-- K -->
+      <key code="45" action="N"/><!-- N -->
+      <key code="46" action="M"/><!-- M -->
+      <!-- } -->
+    </keyMap><!-- } -->
+    <keyMap index="2" baseMapSet="CommonKeymaps" baseIndex="0"><!-- { -->
+      <!-- These keycodes are dependent on the keyboard layout. { -->
+      <key code="0" action="A"/><!-- A -->
+      <key code="1" action="S"/><!-- S -->
+      <key code="2" action="D"/><!-- D -->
+      <key code="3" action="F"/><!-- F -->
+      <key code="4" action="H"/><!-- H -->
+      <key code="5" action="G"/><!-- G -->
+      <key code="6" action="Z"/><!-- Z -->
+      <key code="7" action="X"/><!-- X -->
+      <key code="8" action="C"/><!-- C -->
+      <key code="9" action="V"/><!-- V -->
+      <key code="11" action="B"/><!-- B -->
+      <key code="12" action="Q"/><!-- Q -->
+      <key code="13" action="W"/><!-- W -->
+      <key code="14" action="E"/><!-- E -->
+      <key code="15" action="R"/><!-- R -->
+      <key code="16" action="Y"/><!-- Y -->
+      <key code="17" action="T"/><!-- T -->
+      <key code="31" action="O"/><!-- O -->
+      <key code="32" action="U"/><!-- U -->
+      <key code="34" action="I"/><!-- I -->
+      <key code="35" action="P"/><!-- P -->
+      <key code="37" action="L"/><!-- L -->
+      <key code="38" action="J"/><!-- J -->
+      <key code="40" action="K"/><!-- K -->
+      <key code="45" action="N"/><!-- N -->
+      <key code="46" action="M"/><!-- M -->
+      <key code="18" output="!"/><!-- 1 -->
+      <key code="19" action="@"/><!-- 2 -->
+      <key code="20" action="#"/><!-- 3 -->
+      <key code="21" output="$"/><!-- 4 -->
+      <key code="22" action="^"/><!-- 6 -->
+      <key code="23" action="%"/><!-- 5 -->
+      <key code="24" output="+"/><!-- Equal -->
+      <key code="25" output="("/><!-- 9 -->
+      <key code="26" output="&#x0026;"/><!-- 7 -->
+      <key code="27" output="_"/><!-- Minus -->
+      <key code="28" action="*"/><!-- 8 -->
+      <key code="29" output=")"/><!-- 0 -->
+      <key code="30" output="}"/><!-- RightBracket -->
+      <key code="33" output="{"/><!-- LeftBracket -->
+      <key code="39" output="&#x0022;"/><!-- Quote -->
+      <key code="41" output=":"/><!-- Semicolon -->
+      <key code="42" output="|"/><!-- Backslash -->
+      <key code="43" output="&#x003C;"/><!-- Comma -->
+      <key code="44" output="?"/><!-- Slash -->
+      <key code="47" output="&#x003E;"/><!-- Period -->
+      <key code="50" output="~"/><!-- Grave -->
+      <!-- } -->
+      <!-- These keycodes are for ISO keyboards only. { -->
+      <key code="10" output="±"/><!-- Section -->
+      <!-- } -->
+      <!-- These keycodes are for JIS keyboards only. { -->
+      <key code="93" output="|"/><!-- Yen -->
+      <!-- } -->
+    </keyMap><!-- } -->
+    <keyMap index="3" baseMapSet="CommonKeymaps" baseIndex="0"><!-- { -->
+      <!-- These keycodes are dependent on the keyboard layout. { -->
+      <key code="18" output="!"/><!-- 1 -->
+      <key code="19" action="@"/><!-- 2 -->
+      <key code="20" action="#"/><!-- 3 -->
+      <key code="21" output="$"/><!-- 4 -->
+      <key code="22" action="^"/><!-- 6 -->
+      <key code="23" action="%"/><!-- 5 -->
+      <key code="24" output="+"/><!-- Equal -->
+      <key code="25" output="("/><!-- 9 -->
+      <key code="26" output="&#x0026;"/><!-- 7 -->
+      <key code="27" output="_"/><!-- Minus -->
+      <key code="28" action="*"/><!-- 8 -->
+      <key code="29" output=")"/><!-- 0 -->
+      <key code="30" output="}"/><!-- RightBracket -->
+      <key code="33" output="{"/><!-- LeftBracket -->
+      <key code="39" output="&#x0022;"/><!-- Quote -->
+      <key code="41" output=":"/><!-- Semicolon -->
+      <key code="42" output="|"/><!-- Backslash -->
+      <key code="43" output="&#x003C;"/><!-- Comma -->
+      <key code="44" output="?"/><!-- Slash -->
+      <key code="47" output="&#x003E;"/><!-- Period -->
+      <key code="50" output="~"/><!-- Grave -->
+      <!-- } -->
+      <!-- These keycodes are for ISO keyboards only. { -->
+      <key code="10" output="±"/><!-- Section -->
+      <!-- } -->
+      <!-- These keycodes are for JIS keyboards only. { -->
+      <key code="93" output="|"/><!-- Yen -->
+      <!-- } -->
+    </keyMap><!-- } -->
+    <keyMap index="4"><!-- { -->
+      <!-- These keycodes are dependent on the keyboard layout. { -->
+      <key code="0" action="Macron"/><!-- A -->
+      <key code="1" output="ß"/><!-- S -->
+      <key code="2" output="ð"/><!-- D -->
+      <key code="3" output="ƒ"/><!-- F -->
+      <key code="4" action="Macron Below"/><!-- H -->
+      <key code="5" output="©"/><!-- G -->
+      <key code="6" action="Hook Above"/><!-- Z -->
+      <key code="7" action="Dot Below"/><!-- X -->
+      <key code="8" action="Cedilla"/><!-- C -->
+      <key code="9" action="Caron"/><!-- V -->
+      <!-- skip 10 -->
+      <key code="11" action="Breve"/><!-- B -->
+      <key code="12" output="œ"/><!-- Q -->
+      <key code="13" action="Dot"/><!-- W -->
+      <key code="14" action="Acute"/><!-- E -->
+      <key code="15" output="®"/><!-- R -->
+      <key code="16" output="¥"/><!-- Y -->
+      <key code="17" output="þ"/><!-- T -->
+      <key code="18" output="¡"/><!-- 1 -->
+      <key code="19" output="™"/><!-- 2 -->
+      <key code="20" output="£"/><!-- 3 -->
+      <key code="21" output="¢"/><!-- 4 -->
+      <key code="22" action="Circumflex"/><!-- 6 -->
+      <key code="23" output="§"/><!-- 5 -->
+      <key code="24" output="≠"/><!-- Equal -->
+      <key code="25" output="ª"/><!-- 9 -->
+      <key code="26" output="¶"/><!-- 7 -->
+      <key code="27" output="–"/><!-- Minus -->
+      <key code="28" output="•"/><!-- 8 -->
+      <key code="29" output="º"/><!-- 0 -->
+      <key code="30" output="‘"/><!-- RightBracket -->
+      <key code="31" output="ø"/><!-- O -->
+      <key code="32" action="Diaeresis"/><!-- U -->
+      <key code="33" output="“"/><!-- LeftBracket -->
+      <key code="34" action="Horn"/><!-- I -->
+      <key code="35" action="Comma Below"/><!-- P -->
+      <!-- skip 36 -->
+      <key code="37" action="Stroke"/><!-- L -->
+      <key code="38" action="Double Acute"/><!-- J -->
+      <key code="39" output="æ"/><!-- Quote -->
+      <key code="40" action="Ring"/><!-- K -->
+      <key code="41" output="…"/><!-- Semicolon -->
+      <key code="42" output="«"/><!-- Backslash -->
+      <key code="43" output="≤"/><!-- Comma -->
+      <key code="44" output="÷"/><!-- Slash -->
+      <key code="45" action="Tilde"/><!-- N -->
+      <key code="46" action="Ogonek"/><!-- M -->
+      <key code="47" output="≥"/><!-- Period -->
+      <!-- skip 48-49 -->
+      <key code="50" action="Grave"/><!-- Grave -->
+      <!-- skip 51-64 -->
+      <key code="65" output="."/><!-- KeypadDecimal -->
+      <!-- skip 66 -->
+      <key code="67" output="*"/><!-- KeypadMultiply -->
+      <!-- skip 68 -->
+      <key code="69" output="+"/><!-- KeypadPlus -->
+      <!-- skip 70 -->
+      <key code="71" output="&#xF739;"/><!-- KeypadClear: Num Lock -->
+      <!-- skip 72-74 -->
+      <key code="75" output="/"/><!-- KeypadDivide -->
+      <key code="76" output="&#x0003;"/><!-- KeypadEnter -->
+      <!-- skip 77 -->
+      <key code="78" output="-"/><!-- KeypadMinus -->
+      <!-- skip 79-80 -->
+      <key code="81" output="="/><!-- KeypadEquals -->
+      <key code="82" output="0"/><!-- Keypad0 -->
+      <key code="83" output="1"/><!-- Keypad1 -->
+      <key code="84" output="2"/><!-- Keypad2 -->
+      <key code="85" output="3"/><!-- Keypad3 -->
+      <key code="86" output="4"/><!-- Keypad4 -->
+      <key code="87" output="5"/><!-- Keypad5 -->
+      <key code="88" output="6"/><!-- Keypad6 -->
+      <key code="89" output="7"/><!-- Keypad7 -->
+      <!-- skip 90 -->
+      <key code="91" output="8"/><!-- Keypad8 -->
+      <key code="92" output="9"/><!-- Keypad9 -->
+      <!-- } -->
+      <!-- These keycodes are independent of keyboard layouts. { -->
+      <key code="36" output="&#x000D;"/><!-- Return -->
+      <key code="48" action="Tab"/><!-- Tab -->
+      <key code="49" action="HardSpace"/><!-- Space -->
+      <key code="51" output="&#x007F;"/><!-- Delete -->
+      <key code="53" output="&#x001B;"/><!-- Escape -->
+      <key code="55" output=""/><!-- Command -->
+      <key code="56" output=""/><!-- Shift -->
+      <key code="57" output=""/><!-- CapsLock -->
+      <key code="58" output=""/><!-- Option -->
+      <key code="59" output=""/><!-- Control -->
+      <key code="60" output=""/><!-- RightShift -->
+      <key code="61" output=""/><!-- RightOption -->
+      <key code="62" output=""/><!-- RightControl -->
+      <key code="63" output=""/><!-- Function -->
+      <key code="64" output="&#xF714;"/><!-- F17 -->
+      <key code="72" output=""/><!-- VolumeUp -->
+      <key code="73" output=""/><!-- VolumeDown -->
+      <key code="74" output=""/><!-- Mute -->
+      <key code="79" output="&#xF715;"/><!-- F18 -->
+      <key code="80" output="&#xF716;"/><!-- F19 -->
+      <key code="90" output="&#xF717;"/><!-- F20 -->
+      <key code="96" output="&#xF708;"/><!-- F5 -->
+      <key code="97" output="&#xF709;"/><!-- F6 -->
+      <key code="98" output="&#xF70A;"/><!-- F7 -->
+      <key code="99" output="&#xF706;"/><!-- F3 -->
+      <key code="100" output="&#xF70B;"/><!-- F8 -->
+      <key code="101" output="&#xF70C;"/><!-- F9 -->
+      <key code="103" output="&#xF70E;"/><!-- F11 -->
+      <key code="105" output="&#xF710;"/><!-- F13: Print Screen -->
+      <key code="106" output="&#xF713;"/><!-- F16 -->
+      <key code="107" output="&#xF711;"/><!-- F14: Scroll Lock -->
+      <key code="109" output="&#xF70D;"/><!-- F10 -->
+      <key code="111" output="&#xF70F;"/><!-- F12 -->
+      <key code="113" output="&#xF712;"/><!-- F15: Pause/Break -->
+      <key code="114" output="&#xF746;"/><!-- Help: Insert -->
+      <key code="115" output="&#xF729;"/><!-- Home -->
+      <key code="116" output="&#xF72C;"/><!-- PageUp -->
+      <key code="117" output="&#xF728;"/><!-- ForwardDelete -->
+      <key code="118" output="&#xF707;"/><!-- F4 -->
+      <key code="119" output="&#xF72B;"/><!-- End -->
+      <key code="120" output="&#xF705;"/><!-- F2 -->
+      <key code="121" output="&#xF72D;"/><!-- PageDown -->
+      <key code="122" output="&#xF704;"/><!-- F1 -->
+      <key code="123" output="&#xF702;"/><!-- LeftArrow -->
+      <key code="124" output="&#xF703;"/><!-- RightArrow -->
+      <key code="125" output="&#xF701;"/><!-- DownArrow -->
+      <key code="126" output="&#xF700;"/><!-- UpArrow -->
+      <!-- } -->
+      <!-- These keycodes are for ISO keyboards only. { -->
+      <key code="10" output="§"/><!-- Section -->
+      <!-- } -->
+      <!-- These keycodes are for JIS keyboards only. { -->
+      <key code="93" output="\"/><!-- Yen -->
+      <key code="94" action="Grave"/><!-- Underscore -->
+      <key code="95" output=","/><!-- KeypadComma -->
+      <key code="102" output=""/><!-- Eisu -->
+      <key code="104" output=""/><!-- Kana -->
+      <!-- } -->
+    </keyMap><!-- } -->
+    <keyMap index="5" baseMapSet="CommonKeymaps" baseIndex="4"><!-- { -->
+      <key code="1" output="SS"/><!-- S -->
+      <key code="2" output="Ð"/><!-- D -->
+      <key code="12" output="Œ"/><!-- Q -->
+      <key code="17" output="Þ"/><!-- T -->
+      <key code="31" output="Ø"/><!-- O -->
+      <key code="39" output="Æ"/><!-- Quote -->
+      <!-- These keycodes are for JIS keyboards only. { -->
+      <key code="93" output="«"/><!-- Yen -->
+      <!-- } -->
+    </keyMap><!-- } -->
+    <keyMap index="6" baseMapSet="CommonKeymaps" baseIndex="4"><!-- { -->
+      <key code="0" output="&#x0304;"/><!-- A -->
+      <key code="1" action="Inverted Breve"/><!-- S -->
+      <key code="2" output="Ð"/><!-- D -->
+      <key code="3" action="Tilde Below"/><!-- F -->
+      <key code="4" output="&#x0331;"/><!-- H -->
+      <key code="5" action="Circumflex Below"/><!-- G -->
+      <key code="6" output="&#x0309;"/><!-- Z -->
+      <key code="7" output="&#x0323;"/><!-- X -->
+      <key code="8" output="&#x0327;"/><!-- C -->
+      <key code="9" output="&#x030C;"/><!-- V -->
+      <key code="11" output="&#x0306;"/><!-- B -->
+      <key code="12" output="Œ"/><!-- Q -->
+      <key code="13" output="&#x0307;"/><!-- W -->
+      <key code="14" output="&#x0301;"/><!-- E -->
+      <key code="15" output="‰"/><!-- R -->
+      <key code="16" action="Double Grave"/><!-- Y -->
+      <key code="17" output="Þ"/><!-- T -->
+      <key code="18" output="⁄"/><!-- 1 -->
+      <key code="19" output="€"/><!-- 2 -->
+      <key code="20" output="‹"/><!-- 3 -->
+      <key code="21" output="›"/><!-- 4 -->
+      <key code="22" output="&#x0302;"/><!-- 6 -->
+      <key code="23" output="†"/><!-- 5 -->
+      <key code="24" output="±"/><!-- Equal -->
+      <key code="25" output="·"/><!-- 9 -->
+      <key code="26" output="‡"/><!-- 7 -->
+      <key code="27" output="—"/><!-- Minus -->
+      <key code="28" output="°"/><!-- 8 -->
+      <key code="29" output="‚"/><!-- 0 -->
+      <key code="30" output="’"/><!-- RightBracket -->
+      <key code="31" output="Ø"/><!-- O -->
+      <key code="32" output="&#x0308;"/><!-- U -->
+      <key code="33" output="”"/><!-- LeftBracket -->
+      <key code="34" output="&#x031B;"/><!-- I -->
+      <key code="35" output="&#x0326;"/><!-- P -->
+      <key code="37" output="&#x0335;"/><!-- L -->
+      <key code="38" output="&#x030B;"/><!-- J -->
+      <key code="39" output="Æ"/><!-- Quote -->
+      <key code="40" output="&#x030A;"/><!-- K -->
+      <key code="41" action="Number"/><!-- Semicolon -->
+      <key code="42" output="»"/><!-- Backslash -->
+      <key code="43" output="„"/><!-- Comma -->
+      <key code="44" output="¿"/><!-- Slash -->
+      <key code="45" output="&#x0303;"/><!-- N -->
+      <key code="46" output="&#x0328;"/><!-- M -->
+      <key code="47" action="Hook"/><!-- Period -->
+      <key code="50" output="&#x0300;"/><!-- Grave -->
+      <!-- These keycodes are for ISO keyboards only. { -->
+      <key code="10" output="±"/><!-- Section -->
+      <!-- } -->
+      <!-- These keycodes are for JIS keyboards only. { -->
+      <key code="93" output="»"/><!-- Yen -->
+      <key code="94" output="&#x0300;"/><!-- Underscore -->
+      <!-- } -->
+    </keyMap><!-- } -->
+    <keyMap index="7" baseMapSet="SpecialKeymaps" baseIndex="0"><!-- { -->
+      <key code="0" output="&#x0001;"/><!-- A -->
+      <key code="1" output="&#x0013;"/><!-- S -->
+      <key code="2" output="&#x0004;"/><!-- D -->
+      <key code="3" output="&#x0006;"/><!-- F -->
+      <key code="4" output="&#x0008;"/><!-- H -->
+      <key code="5" output="&#x0007;"/><!-- G -->
+      <key code="6" output="&#x001A;"/><!-- Z -->
+      <key code="7" output="&#x0018;"/><!-- X -->
+      <key code="8" output="&#x0003;"/><!-- C -->
+      <key code="9" output="&#x0016;"/><!-- V -->
+      <key code="11" output="&#x0002;"/><!-- B -->
+      <key code="12" output="&#x0011;"/><!-- Q -->
+      <key code="13" output="&#x0017;"/><!-- W -->
+      <key code="14" output="&#x0005;"/><!-- E -->
+      <key code="15" output="&#x0012;"/><!-- R -->
+      <key code="16" output="&#x0019;"/><!-- Y -->
+      <key code="17" output="&#x0014;"/><!-- T -->
+      <key code="31" output="&#x000F;"/><!-- O -->
+      <key code="32" output="&#x0015;"/><!-- U -->
+      <key code="34" output="&#x0009;"/><!-- I -->
+      <key code="35" output="&#x0010;"/><!-- P -->
+      <key code="37" output="&#x000C;"/><!-- L -->
+      <key code="38" output="&#x000A;"/><!-- J -->
+      <key code="40" output="&#x000B;"/><!-- K -->
+      <key code="45" output="&#x000E;"/><!-- N -->
+      <key code="46" output="&#x000D;"/><!-- M -->
+      <key code="27" output="&#x001F;"/><!-- Minus -->
+      <key code="30" output="&#x001D;"/><!-- RightBracket -->
+      <key code="33" output="&#x001B;"/><!-- LeftBracket -->
+      <key code="42" output="&#x001C;"/><!-- Backslash -->
+      <key code="49" output="&#x0000;"/><!-- Space -->
+      <!-- These keycodes are for ISO keyboards only. { -->
+      <key code="10" output="0"/><!-- Section -->
+      <!-- } -->
+    </keyMap><!-- } -->
+  </keyMapSet><!-- } -->
+
+  <!--
+    - Each <action> element specifies a set of actions to take based on the
+    - current state of the state machine. This is specified by one or more
+    - <when> elements, each of which specifies one or more states, and an
+    - action to take when the action is executed and the current state matches.
+    -
+    - Attributes of <action>:
+    -   id: ? ~ A unique identifier across all <action> elements.
+    -
+    - Attributes of <when>:
+    -   state: ?      ~ The state to apply. It can be an arbitrary string or a
+    -                 ~ decimal number, or the special string "none", indicating
+    -                 ~ indicating the initial state. A <when> element for state
+    -                 ~ "none" must be the first in the enclosing <action>.
+    -   through: 0    ~ An optional decimal number to specify a state of range
+    -                 ~ from state to through.
+    -   next: 0       ~ If present, the next state to enter. If the <when>
+    -                 ~ element specifies a range, it must be a decimal number.
+    -                 ~ Defaults to state "none".
+    -   multiplier: 0 ~ A decimal number between 1 and 255. The <when> element
+    -                 ~ must specify a range. The difference between the input
+    -                 ~ state and the start of the range is multiplied by this
+    -                 ~ number, then added to the next state number and/or the
+    -                 ~ output UTF-16 value.
+    -   output: ?     ~ If present, the string to emit. If the <when> element
+    -                 ~ specifies a range, It must be a UTF-16 code point.
+    -                 ~ Defaults to no output.
+    - The compiler will automatically assign numbers to named states; state
+    - numbers may also be referenced directly. The numbers assigned by the
+    - compiler to named states will be larger than any number referenced
+    - directly, so named states and numbered states are always distinct. If the
+    - highest state number referenced directly is large enough that there are
+    - not enough valid state numbers left to assign to the named states, an
+    - error occurs.
+    -->
+  <actions><!-- { -->
+    <action id="Grave">
+      <when state="none" next="Grave"/>
+      <when state="Grave" next="Double Grave"/>
+      <when state="Circumflex" next="Circumflex and Grave"/>
+      <when state="Diaeresis" next="Diaeresis and Grave"/>
+      <when state="Macron" next="Macron and Grave"/>
+      <when state="Breve" next="Breve and Grave"/>
+      <when state="Horn" next="Horn and Grave"/>
+    </action>
+    <action id="Acute">
+      <when state="none" next="Acute"/>
+      <when state="Acute" next="Double Acute"/>
+      <when state="Circumflex" next="Circumflex and Acute"/>
+      <when state="Tilde" next="Tilde and Acute"/>
+      <when state="Diaeresis" next="Diaeresis and Acute"/>
+      <when state="Macron" next="Macron and Acute"/>
+      <when state="Breve" next="Breve and Acute"/>
+      <when state="Ring" next="Ring and Acute"/>
+      <when state="Cedilla" next="Cedilla and Acute"/>
+      <when state="Horn" next="Horn and Acute"/>
+      <when state="Stroke" next="Stroke and Acute"/>
+    </action>
+    <action id="Circumflex">
+      <when state="none" next="Circumflex"/>
+    </action>
+    <action id="Tilde">
+      <when state="none" next="Tilde"/>
+      <when state="Acute" next="Tilde and Acute"/>
+      <when state="Circumflex" next="Circumflex and Tilde"/>
+      <when state="Breve" next="Breve and Tilde"/>
+      <when state="Horn" next="Horn and Tilde"/>
+    </action>
+    <action id="Diaeresis">
+      <when state="none" next="Diaeresis"/>
+      <when state="Tilde" next="Tilde and Diaeresis"/>
+      <when state="Macron" next="Macron and Diaeresis"/>
+    </action>
+    <action id="Macron">
+      <when state="none" next="Macron"/>
+      <when state="Diaeresis" next="Diaeresis and Macron"/>
+      <when state="Tilde" next="Tilde and Macron"/>
+      <when state="Dot" next="Dot and Macron"/>
+      <when state="Ogonek" next="Ogonek and Macron"/>
+    </action>
+    <action id="Breve">
+      <when state="none" next="Breve"/>
+      <when state="Cedilla" next="Cedilla and Breve"/>
+    </action>
+    <action id="Dot">
+      <when state="none" next="Dot"/>
+      <when state="Acute" next="Acute and Dot"/>
+      <when state="Caron" next="Caron and Dot"/>
+    </action>
+    <action id="Ring">
+      <when state="none" next="Ring"/>
+    </action>
+    <action id="Caron">
+      <when state="none" next="Caron"/>
+      <when state="Diaeresis" next="Diaeresis and Caron"/>
+    </action>
+    <action id="Cedilla">
+      <when state="none" next="Cedilla"/>
+    </action>
+    <action id="Ogonek">
+      <when state="none" next="Ogonek"/>
+    </action>
+    <action id="Hook">
+      <when state="none" next="Hook"/>
+      <when state="Stroke" next="Stroke and Hook"/>
+    </action>
+    <action id="Horn">
+      <when state="none" next="Horn"/>
+    </action>
+    <action id="Stroke">
+      <when state="none" next="Stroke"/>
+      <when state="Dot" next="Dot and Stroke"/>
+      <when state="Hook" output="ʡ"/>
+    </action>
+    <action id="Number">
+      <when state="none" next="Number"/>
+    </action>
+    <action id="Inverted Breve">
+      <when state="none" next="Inverted Breve"/>
+    </action>
+    <action id="Circumflex Below">
+      <when state="none" next="Circumflex Below"/>
+    </action>
+    <action id="Tilde Below">
+      <when state="none" next="Tilde Below"/>
+    </action>
+    <action id="Macron Below">
+      <when state="none" next="Macron Below"/>
+    </action>
+    <action id="Dot Below">
+      <when state="none" next="Dot Below"/>
+      <when state="Circumflex" next="Circumflex and Dot Below"/>
+      <when state="Macron" next="Macron and Dot Below"/>
+      <when state="Breve" next="Breve and Dot Below"/>
+      <when state="Dot" next="Dot and Dot Below"/>
+      <when state="Horn" next="Horn and Dot Below"/>
+    </action>
+    <action id="Comma Below">
+      <when state="none" next="Comma Below"/>
+    </action>
+    <action id="Hook Above">
+      <when state="none" next="Hook Above"/>
+      <when state="Circumflex" next="Circumflex and Hook Above"/>
+      <when state="Breve" next="Breve and Hook Above"/>
+      <when state="Horn" next="Horn and Hook Above"/>
+    </action>
+    <action id="Double Grave">
+      <when state="none" next="Double Grave"/>
+    </action>
+    <action id="Double Acute">
+      <when state="none" next="Double Acute"/>
+    </action>
+    <action id="a">
+      <when state="none" output="a"/>
+      <when state="Grave" output="à"/>
+      <when state="Acute" output="á"/>
+      <when state="Circumflex" output="â"/>
+      <when state="Tilde" output="ã"/>
+      <when state="Diaeresis" output="ä"/>
+      <when state="Macron" output="ā"/>
+      <when state="Breve" output="ă"/>
+      <when state="Dot" output="ȧ"/>
+      <when state="Ring" output="å"/>
+      <when state="Caron" output="ǎ"/>
+      <when state="Ogonek" output="ą"/>
+      <when state="Stroke" output="ⱥ"/>
+      <when state="Number" output="ə"/>
+      <when state="Inverted Breve" output="ȃ"/>
+      <when state="Dot Below" output="ạ"/>
+      <when state="Hook Above" output="ả"/>
+      <when state="Double Grave" output="ȁ"/>
+      <when state="Circumflex and Grave" output="ầ"/>
+      <when state="Circumflex and Acute" output="ấ"/>
+      <when state="Circumflex and Tilde" output="ẫ"/>
+      <when state="Circumflex and Dot Below" output="ậ"/>
+      <when state="Circumflex and Hook Above" output="ẩ"/>
+      <when state="Breve and Grave" output="ằ"/>
+      <when state="Breve and Acute" output="ắ"/>
+      <when state="Breve and Tilde" output="ẵ"/>
+      <when state="Breve and Dot Below" output="ặ"/>
+      <when state="Breve and Hook Above" output="ẳ"/>
+      <when state="Dot and Macron" output="ǡ"/>
+      <when state="Diaeresis and Macron" output="ǟ"/>
+      <when state="Ring and Acute" output="ǻ"/>
+    </action>
+    <action id="A">
+      <when state="none" output="A"/>
+      <when state="Grave" output="À"/>
+      <when state="Acute" output="Á"/>
+      <when state="Circumflex" output="Â"/>
+      <when state="Tilde" output="Ã"/>
+      <when state="Diaeresis" output="Ä"/>
+      <when state="Macron" output="Ā"/>
+      <when state="Breve" output="Ă"/>
+      <when state="Dot" output="Ȧ"/>
+      <when state="Ring" output="Å"/>
+      <when state="Caron" output="Ǎ"/>
+      <when state="Ogonek" output="Ą"/>
+      <when state="Stroke" output="Ⱥ"/>
+      <when state="Number" output="Ə"/>
+      <when state="Inverted Breve" output="Ȃ"/>
+      <when state="Dot Below" output="Ạ"/>
+      <when state="Hook Above" output="Ả"/>
+      <when state="Double Grave" output="Ȁ"/>
+      <when state="Circumflex and Grave" output="Ầ"/>
+      <when state="Circumflex and Acute" output="Ấ"/>
+      <when state="Circumflex and Tilde" output="Ẫ"/>
+      <when state="Circumflex and Dot Below" output="Ậ"/>
+      <when state="Circumflex and Hook Above" output="Ẩ"/>
+      <when state="Breve and Grave" output="Ằ"/>
+      <when state="Breve and Acute" output="Ắ"/>
+      <when state="Breve and Tilde" output="Ẵ"/>
+      <when state="Breve and Dot Below" output="Ặ"/>
+      <when state="Breve and Hook Above" output="Ẳ"/>
+      <when state="Dot and Macron" output="Ǡ"/>
+      <when state="Diaeresis and Macron" output="Ǟ"/>
+      <when state="Ring and Acute" output="Ǻ"/>
+    </action>
+    <action id="e">
+      <when state="none" output="e"/>
+      <when state="Grave" output="è"/>
+      <when state="Acute" output="é"/>
+      <when state="Circumflex" output="ê"/>
+      <when state="Tilde" output="ẽ"/>
+      <when state="Diaeresis" output="ë"/>
+      <when state="Macron" output="ē"/>
+      <when state="Breve" output="ĕ"/>
+      <when state="Dot" output="ė"/>
+      <when state="Caron" output="ě"/>
+      <when state="Cedilla" output="ȩ"/>
+      <when state="Ogonek" output="ę"/>
+      <when state="Stroke" output="ɇ"/>
+      <when state="Number" output="ǝ"/>
+      <when state="Inverted Breve" output="ȇ"/>
+      <when state="Circumflex Below" output="ḙ"/>
+      <when state="Tilde Below" output="ḛ"/>
+      <when state="Dot Below" output="ẹ"/>
+      <when state="Hook Above" output="ẻ"/>
+      <when state="Double Grave" output="ȅ"/>
+      <when state="Circumflex and Grave" output="ề"/>
+      <when state="Circumflex and Acute" output="ế"/>
+      <when state="Circumflex and Tilde" output="ễ"/>
+      <when state="Circumflex and Dot Below" output="ệ"/>
+      <when state="Circumflex and Hook Above" output="ể"/>
+      <when state="Macron and Grave" output="ḕ"/>
+      <when state="Macron and Acute" output="ḗ"/>
+      <when state="Cedilla and Breve" output="ḝ"/>
+    </action>
+    <action id="E">
+      <when state="none" output="E"/>
+      <when state="Grave" output="È"/>
+      <when state="Acute" output="É"/>
+      <when state="Circumflex" output="Ê"/>
+      <when state="Tilde" output="Ẽ"/>
+      <when state="Diaeresis" output="Ë"/>
+      <when state="Macron" output="Ē"/>
+      <when state="Breve" output="Ĕ"/>
+      <when state="Dot" output="Ė"/>
+      <when state="Caron" output="Ě"/>
+      <when state="Cedilla" output="Ȩ"/>
+      <when state="Ogonek" output="Ę"/>
+      <when state="Stroke" output="Ɇ"/>
+      <when state="Number" output="Ǝ"/>
+      <when state="Inverted Breve" output="Ȇ"/>
+      <when state="Circumflex Below" output="Ḙ"/>
+      <when state="Tilde Below" output="Ḛ"/>
+      <when state="Dot Below" output="Ẹ"/>
+      <when state="Hook Above" output="Ẻ"/>
+      <when state="Double Grave" output="Ȅ"/>
+      <when state="Circumflex and Grave" output="Ề"/>
+      <when state="Circumflex and Acute" output="Ế"/>
+      <when state="Circumflex and Tilde" output="Ễ"/>
+      <when state="Circumflex and Dot Below" output="Ệ"/>
+      <when state="Circumflex and Hook Above" output="Ể"/>
+      <when state="Macron and Grave" output="Ḕ"/>
+      <when state="Macron and Acute" output="Ḗ"/>
+      <when state="Cedilla and Breve" output="Ḝ"/>
+    </action>
+    <action id="i">
+      <when state="none" output="i"/>
+      <when state="Grave" output="ì"/>
+      <when state="Acute" output="í"/>
+      <when state="Circumflex" output="î"/>
+      <when state="Tilde" output="ĩ"/>
+      <when state="Diaeresis" output="ï"/>
+      <when state="Macron" output="ī"/>
+      <when state="Breve" output="ĭ"/>
+      <when state="Dot" output="ı"/>
+      <when state="Caron" output="ǐ"/>
+      <when state="Ogonek" output="į"/>
+      <when state="Stroke" output="ɨ"/>
+      <when state="Inverted Breve" output="ȋ"/>
+      <when state="Tilde Below" output="ḭ"/>
+      <when state="Dot Below" output="ị"/>
+      <when state="Hook Above" output="ỉ"/>
+      <when state="Double Grave" output="ȉ"/>
+      <when state="Diaeresis and Acute" output="ḯ"/>
+    </action>
+    <action id="I">
+      <when state="none" output="I"/>
+      <when state="Grave" output="Ì"/>
+      <when state="Acute" output="Í"/>
+      <when state="Circumflex" output="Î"/>
+      <when state="Tilde" output="Ĩ"/>
+      <when state="Diaeresis" output="Ï"/>
+      <when state="Macron" output="Ī"/>
+      <when state="Breve" output="Ĭ"/>
+      <when state="Dot" output="İ"/>
+      <when state="Caron" output="Ǐ"/>
+      <when state="Ogonek" output="Į"/>
+      <when state="Stroke" output="Ɨ"/>
+      <when state="Inverted Breve" output="Ȋ"/>
+      <when state="Tilde Below" output="Ḭ"/>
+      <when state="Dot Below" output="Ị"/>
+      <when state="Hook Above" output="Ỉ"/>
+      <when state="Double Grave" output="Ȉ"/>
+      <when state="Diaeresis and Acute" output="Ḯ"/>
+    </action>
+    <action id="o">
+      <when state="none" output="o"/>
+      <when state="Grave" output="ò"/>
+      <when state="Acute" output="ó"/>
+      <when state="Circumflex" output="ô"/>
+      <when state="Tilde" output="õ"/>
+      <when state="Diaeresis" output="ö"/>
+      <when state="Macron" output="ō"/>
+      <when state="Breve" output="ŏ"/>
+      <when state="Dot" output="ȯ"/>
+      <when state="Caron" output="ǒ"/>
+      <when state="Ogonek" output="ǫ"/>
+      <when state="Horn" output="ơ"/>
+      <when state="Stroke" output="ɵ"/>
+      <when state="Inverted Breve" output="ȏ"/>
+      <when state="Dot Below" output="ọ"/>
+      <when state="Hook Above" output="ỏ"/>
+      <when state="Double Grave" output="ȍ"/>
+      <when state="Double Acute" output="ő"/>
+      <when state="Circumflex and Grave" output="ồ"/>
+      <when state="Circumflex and Acute" output="ố"/>
+      <when state="Circumflex and Tilde" output="ỗ"/>
+      <when state="Circumflex and Dot Below" output="ộ"/>
+      <when state="Circumflex and Hook Above" output="ổ"/>
+      <when state="Tilde and Acute" output="ṍ"/>
+      <when state="Tilde and Diaeresis" output="ṏ"/>
+      <when state="Tilde and Macron" output="ȭ"/>
+      <when state="Macron and Grave" output="ṑ"/>
+      <when state="Macron and Acute" output="ṓ"/>
+      <when state="Dot and Macron" output="ȱ"/>
+      <when state="Diaeresis and Macron" output="ȫ"/>
+      <when state="Ogonek and Macron" output="ǭ"/>
+      <when state="Horn and Grave" output="Ờ"/>
+      <when state="Horn and Acute" output="ớ"/>
+      <when state="Horn and Tilde" output="ỡ"/>
+      <when state="Horn and Dot Below" output="ợ"/>
+      <when state="Horn and Hook Above" output="ở"/>
+      <when state="Stroke and Acute" output="ǿ"/>
+    </action>
+    <action id="O">
+      <when state="none" output="O"/>
+      <when state="Grave" output="Ò"/>
+      <when state="Acute" output="Ó"/>
+      <when state="Circumflex" output="Ô"/>
+      <when state="Tilde" output="Õ"/>
+      <when state="Diaeresis" output="Ö"/>
+      <when state="Macron" output="Ō"/>
+      <when state="Breve" output="Ŏ"/>
+      <when state="Dot" output="Ȯ"/>
+      <when state="Caron" output="Ǒ"/>
+      <when state="Ogonek" output="Ǫ"/>
+      <when state="Horn" output="Ơ"/>
+      <when state="Stroke" output="Ɵ"/>
+      <when state="Inverted Breve" output="Ȏ"/>
+      <when state="Dot Below" output="Ọ"/>
+      <when state="Hook Above" output="Ỏ"/>
+      <when state="Double Grave" output="Ȍ"/>
+      <when state="Double Acute" output="Ő"/>
+      <when state="Circumflex and Grave" output="Ồ"/>
+      <when state="Circumflex and Acute" output="Ố"/>
+      <when state="Circumflex and Tilde" output="Ỗ"/>
+      <when state="Circumflex and Dot Below" output="Ộ"/>
+      <when state="Circumflex and Hook Above" output="Ổ"/>
+      <when state="Tilde and Acute" output="Ṍ"/>
+      <when state="Tilde and Macron" output="Ȭ"/>
+      <when state="Macron and Grave" output="Ṑ"/>
+      <when state="Macron and Acute" output="Ṓ"/>
+      <when state="Dot and Macron" output="Ȱ"/>
+      <when state="Diaeresis and Macron" output="Ȫ"/>
+      <when state="Ogonek and Macron" output="Ǭ"/>
+      <when state="Horn and Grave" output="ờ"/>
+      <when state="Horn and Acute" output="Ớ"/>
+      <when state="Horn and Tilde" output="Ỡ"/>
+      <when state="Horn and Dot Below" output="Ợ"/>
+      <when state="Horn and Hook Above" output="Ở"/>
+      <when state="Stroke and Acute" output="Ǿ"/>
+    </action>
+    <action id="u">
+      <when state="none" next="u"/>
+      <when state="Grave" output="ù"/>
+      <when state="Acute" output="ú"/>
+      <when state="Circumflex" output="û"/>
+      <when state="Tilde" output="ũ"/>
+      <when state="Diaeresis" output="ü"/>
+      <when state="Macron" output="ū"/>
+      <when state="Breve" output="ŭ"/>
+      <when state="Ring" output="ů"/>
+      <when state="Caron" output="ǔ"/>
+      <when state="Ogonek" output="ų"/>
+      <when state="Hook" output="ʋ"/>
+      <when state="Horn" output="ư"/>
+      <when state="Inverted Breve" output="ȗ"/>
+      <when state="Circumflex Below" output="ṷ"/>
+      <when state="Tilde Below" output="ṵ"/>
+      <when state="Dot Below" output="ụ"/>
+      <when state="Hook Above" output="ủ"/>
+      <when state="Double Grave" output="ȕ"/>
+      <when state="Double Acute" output="ű"/>
+      <when state="Tilde and Acute" output="ṹ"/>
+      <when state="Diaeresis and Grave" output="ǜ"/>
+      <when state="Diaeresis and Acute" output="ǘ"/>
+      <when state="Diaeresis and Macron" output="ǖ"/>
+      <when state="Diaeresis and Caron" output="ǚ"/>
+      <when state="Macron and Diaeresis" output="ṻ"/>
+      <when state="Horn and Grave" output="ừ"/>
+      <when state="Horn and Acute" output="ứ"/>
+      <when state="Horn and Tilde" output="ữ"/>
+      <when state="Horn and Dot Below" output="ự"/>
+      <when state="Horn and Hook Above" output="ử"/>
+    </action>
+    <action id="U">
+      <when state="none" next="U"/>
+      <when state="Grave" output="Ù"/>
+      <when state="Acute" output="Ú"/>
+      <when state="Circumflex" output="Û"/>
+      <when state="Tilde" output="Ũ"/>
+      <when state="Diaeresis" output="Ü"/>
+      <when state="Macron" output="Ū"/>
+      <when state="Breve" output="Ŭ"/>
+      <when state="Ring" output="Ů"/>
+      <when state="Caron" output="Ǔ"/>
+      <when state="Ogonek" output="Ų"/>
+      <when state="Hook" output="Ʋ"/>
+      <when state="Horn" output="Ư"/>
+      <when state="Inverted Breve" output="Ȗ"/>
+      <when state="Circumflex Below" output="Ṷ"/>
+      <when state="Tilde Below" output="Ṵ"/>
+      <when state="Dot Below" output="Ụ"/>
+      <when state="Hook Above" output="Ủ"/>
+      <when state="Double Grave" output="Ȕ"/>
+      <when state="Double Acute" output="Ű"/>
+      <when state="Tilde and Acute" output="Ṹ"/>
+      <when state="Diaeresis and Grave" output="Ǜ"/>
+      <when state="Diaeresis and Acute" output="Ǘ"/>
+      <when state="Diaeresis and Macron" output="Ǖ"/>
+      <when state="Diaeresis and Caron" output="Ǚ"/>
+      <when state="Macron and Diaeresis" output="Ṻ"/>
+      <when state="Horn and Grave" output="Ừ"/>
+      <when state="Horn and Acute" output="Ứ"/>
+      <when state="Horn and Tilde" output="Ữ"/>
+      <when state="Horn and Dot Below" output="Ự"/>
+      <when state="Horn and Hook Above" output="Ử"/>
+    </action>
+    <action id="b">
+      <when state="none" output="b"/>
+      <when state="Dot" output="ḃ"/>
+      <when state="Hook" output="ɓ"/>
+      <when state="Stroke" output="ƀ"/>
+      <when state="Macron Below" output="ḇ"/>
+      <when state="Dot Below" output="ḅ"/>
+    </action>
+    <action id="B">
+      <when state="none" output="B"/>
+      <when state="Dot" output="Ḃ"/>
+      <when state="Hook" output="Ɓ"/>
+      <when state="Stroke" output="Ƀ"/>
+      <when state="Macron Below" output="Ḇ"/>
+      <when state="Dot Below" output="Ḅ"/>
+    </action>
+    <action id="c">
+      <when state="none" next="c"/>
+      <when state="Acute" output="ć"/>
+      <when state="Circumflex" output="ĉ"/>
+      <when state="Dot" output="ċ"/>
+      <when state="Caron" output="č"/>
+      <when state="Cedilla" output="ç"/>
+      <when state="Hook" output="ƈ"/>
+      <when state="Stroke" output="ȼ"/>
+      <when state="Cedilla and Acute" output="ḉ"/>
+    </action>
+    <action id="C">
+      <when state="none" next="C"/>
+      <when state="Acute" output="Ć"/>
+      <when state="Circumflex" output="Ĉ"/>
+      <when state="Dot" output="Ċ"/>
+      <when state="Caron" output="Č"/>
+      <when state="Cedilla" output="Ç"/>
+      <when state="Hook" output="Ƈ"/>
+      <when state="Stroke" output="Ȼ"/>
+      <when state="Cedilla and Acute" output="Ḉ"/>
+    </action>
+    <action id="d">
+      <when state="none" output="d"/>
+      <when state="Dot" output="ḋ"/>
+      <when state="Cedilla" output="ḑ"/>
+      <when state="Hook" output="ɗ"/>
+      <when state="Stroke" output="đ"/>
+      <when state="Circumflex Below" output="ḓ"/>
+      <when state="Macron Below" output="ḏ"/>
+      <when state="Dot Below" output="ḍ"/>
+    </action>
+    <action id="D">
+      <when state="none" output="D"/>
+      <when state="Dot" output="Ḋ"/>
+      <when state="Caron" output="Ď"/>
+      <when state="Cedilla" output="Ḑ"/>
+      <when state="Hook" output="Ɗ"/>
+      <when state="Stroke" output="Đ"/>
+      <when state="Circumflex Below" output="Ḓ"/>
+      <when state="Macron Below" output="Ḏ"/>
+      <when state="Dot Below" output="Ḍ"/>
+    </action>
+    <action id="f">
+      <when state="none" output="f"/>
+      <when state="Dot" output="ḟ"/>
+      <when state="Hook" output="ƒ"/>
+    </action>
+    <action id="F">
+      <when state="none" output="F"/>
+      <when state="Dot" output="Ḟ"/>
+      <when state="Hook" output="Ƒ"/>
+    </action>
+    <action id="g">
+      <when state="none" next="g"/>
+      <when state="Acute" output="ǵ"/>
+      <when state="Circumflex" output="ĝ"/>
+      <when state="Macron" output="ḡ"/>
+      <when state="Breve" output="ğ"/>
+      <when state="Dot" output="ġ"/>
+      <when state="Caron" output="ǧ"/>
+      <when state="Cedilla" output="ģ"/>
+      <when state="Hook" output="ɠ"/>
+      <when state="Stroke" output="ǥ"/>
+    </action>
+    <action id="G">
+      <when state="none" next="G"/>
+      <when state="Acute" output="Ǵ"/>
+      <when state="Circumflex" output="Ĝ"/>
+      <when state="Macron" output="Ḡ"/>
+      <when state="Breve" output="Ğ"/>
+      <when state="Dot" output="Ġ"/>
+      <when state="Caron" output="Ǧ"/>
+      <when state="Cedilla" output="Ģ"/>
+      <when state="Hook" output="Ɠ"/>
+      <when state="Stroke" output="Ǥ"/>
+    </action>
+    <action id="h">
+      <when state="none" next="h"/>
+      <when state="Circumflex" output="ĥ"/>
+      <when state="Diaeresis" output="ḧ"/>
+      <when state="Dot" output="ḣ"/>
+      <when state="Caron" output="ȟ"/>
+      <when state="Cedilla" output="ḩ"/>
+      <when state="Hook" output="ɦ"/>
+      <when state="Stroke" output="ħ"/>
+      <when state="Macron Below" output="ẖ"/>
+      <when state="Dot Below" output="ḥ"/>
+    </action>
+    <action id="H">
+      <when state="none" next="H"/>
+      <when state="Circumflex" output="Ĥ"/>
+      <when state="Diaeresis" output="Ḧ"/>
+      <when state="Caron" output="Ȟ"/>
+      <when state="Cedilla" output="Ḩ"/>
+      <when state="Hook" output="Ɦ"/>
+      <when state="Stroke" output="Ħ"/>
+      <when state="Macron Below" output="H̱"/><!-- for compatibility -->
+      <when state="Dot Below" output="Ḥ"/>
+    </action>
+    <action id="j">
+      <when state="none" next="j"/>
+      <when state="Circumflex" output="ĵ"/>
+      <when state="Dot" output="ȷ"/>
+      <when state="Caron" output="ǰ"/>
+      <when state="Stroke" output="ɉ"/>
+      <when state="Dot and Stroke" output="ɟ"/>
+      <when state="Stroke and Hook" output="ʄ"/>
+    </action>
+    <action id="J">
+      <when state="none" next="J"/>
+      <when state="Circumflex" output="Ĵ"/>
+      <when state="Stroke" output="Ɉ"/>
+    </action>
+    <action id="k">
+      <when state="none" output="k"/>
+      <when state="Acute" output="ḱ"/>
+      <when state="Caron" output="ǩ"/>
+      <when state="Cedilla" output="ķ"/>
+      <when state="Hook" output="ƙ"/>
+      <when state="Number" output="ĸ"/>
+      <when state="Macron Below" output="ḵ"/>
+      <when state="Dot Below" output="ḳ"/>
+    </action>
+    <action id="K">
+      <when state="none" output="K"/>
+      <when state="Acute" output="Ḱ"/>
+      <when state="Caron" output="Ǩ"/>
+      <when state="Cedilla" output="Ķ"/>
+      <when state="Hook" output="Ƙ"/>
+      <when state="Number" output="K"/>
+      <when state="Macron Below" output="Ḵ"/>
+      <when state="Dot Below" output="Ḳ"/>
+    </action>
+    <action id="l">
+      <when state="none" output="l"/>
+      <when state="Acute" output="ĺ"/>
+      <when state="Caron" output="ľ"/>
+      <when state="Cedilla" output="ļ"/>
+      <when state="Stroke" output="ł"/>
+      <when state="Circumflex Below" output="ḽ"/>
+      <when state="Macron Below" output="ḻ"/>
+      <when state="Dot Below" output="ḷ"/>
+      <when state="Macron and Dot Below" output="ḹ"/>
+    </action>
+    <action id="L">
+      <when state="none" output="L"/>
+      <when state="Acute" output="Ĺ"/>
+      <when state="Caron" output="Ľ"/>
+      <when state="Cedilla" output="Ļ"/>
+      <when state="Stroke" output="Ł"/>
+      <when state="Circumflex Below" output="Ḽ"/>
+      <when state="Macron Below" output="Ḻ"/>
+      <when state="Dot Below" output="Ḷ"/>
+      <when state="Macron and Dot Below" output="Ḹ"/>
+    </action>
+    <action id="m">
+      <when state="none" output="m"/>
+      <when state="Acute" output="ḿ"/>
+      <when state="Dot" output="ṁ"/>
+      <when state="Hook" output="ɱ"/>
+      <when state="Number" output="ɯ"/>
+      <when state="Dot Below" output="ṃ"/>
+    </action>
+    <action id="M">
+      <when state="none" output="M"/>
+      <when state="Acute" output="Ḿ"/>
+      <when state="Dot" output="Ṁ"/>
+      <when state="Hook" output="Ɱ"/>
+      <when state="Number" output="Ɯ"/>
+      <when state="Dot Below" output="Ṃ"/>
+    </action>
+    <action id="n">
+      <when state="none" output="n"/>
+      <when state="Grave" output="ǹ"/>
+      <when state="Acute" output="ń"/>
+      <when state="Tilde" output="ñ"/>
+      <when state="Dot" output="ṅ"/>
+      <when state="Caron" output="ň"/>
+      <when state="Cedilla" output="ņ"/>
+      <when state="Hook" output="ɲ"/>
+      <when state="Number" output="ŋ"/>
+      <when state="Circumflex Below" output="ṋ"/>
+      <when state="Macron Below" output="ṉ"/>
+      <when state="Dot Below" output="ṇ"/>
+    </action>
+    <action id="N">
+      <when state="none" output="N"/>
+      <when state="Grave" output="Ǹ"/>
+      <when state="Acute" output="Ń"/>
+      <when state="Tilde" output="Ñ"/>
+      <when state="Dot" output="Ṅ"/>
+      <when state="Caron" output="Ň"/>
+      <when state="Cedilla" output="Ņ"/>
+      <when state="Hook" output="Ɲ"/>
+      <when state="Number" output="Ŋ"/>
+      <when state="Circumflex Below" output="Ṋ"/>
+      <when state="Macron Below" output="Ṉ"/>
+      <when state="Dot Below" output="Ṇ"/>
+    </action>
+    <action id="p">
+      <when state="none" output="p"/>
+      <when state="Acute" output="ṕ"/>
+      <when state="Dot" output="ṗ"/>
+      <when state="Hook" output="ƥ"/>
+      <when state="Stroke" output="ᵽ"/>
+    </action>
+    <action id="P">
+      <when state="none" output="P"/>
+      <when state="Acute" output="Ṕ"/>
+      <when state="Dot" output="Ṗ"/>
+      <when state="Hook" output="Ƥ"/>
+      <when state="Stroke" output="Ᵽ"/>
+    </action>
+    <action id="q">
+      <when state="none" output="q"/>
+      <when state="Hook" output="ʠ"/>
+    </action>
+    <action id="Q">
+      <when state="none" output="Q"/>
+    </action>
+    <action id="r">
+      <when state="none" output="r"/>
+      <when state="Acute" output="ŕ"/>
+      <when state="Dot" output="ṙ"/>
+      <when state="Caron" output="ř"/>
+      <when state="Cedilla" output="ŗ"/>
+      <when state="Hook" output="ʈ"/><!-- for compatibility -->
+      <when state="Stroke" output="ɍ"/>
+      <when state="Number" output="ʀ"/>
+      <when state="Inverted Breve" output="ȓ"/>
+      <when state="Double Grave" output="ȑ"/>
+      <when state="Macron Below" output="ṟ"/>
+      <when state="Dot Below" output="ṛ"/>
+      <when state="Macron and Dot Below" output="ṝ"/>
+    </action>
+    <action id="R">
+      <when state="none" output="R"/>
+      <when state="Acute" output="Ŕ"/>
+      <when state="Dot" output="Ṙ"/>
+      <when state="Caron" output="Ř"/>
+      <when state="Cedilla" output="Ŗ"/>
+      <when state="Stroke" output="Ɍ"/>
+      <when state="Number" output="Ʀ"/>
+      <when state="Inverted Breve" output="Ȓ"/>
+      <when state="Double Grave" output="Ȑ"/>
+      <when state="Macron Below" output="Ṟ"/>
+      <when state="Dot Below" output="Ṛ"/>
+      <when state="Macron and Dot Below" output="Ṝ"/>
+    </action>
+    <action id="s">
+      <when state="none" next="s"/>
+      <when state="Acute" output="ś"/>
+      <when state="Circumflex" output="ŝ"/>
+      <when state="Dot" output="ṡ"/>
+      <when state="Caron" output="š"/>
+      <when state="Cedilla" output="ş"/>
+      <when state="Hook" output="ʃ"/><!-- for compatibility -->
+      <when state="Comma Below" output="ș"/>
+      <when state="Dot Below" output="ṣ"/>
+      <when state="Hook Above" output="ʂ"/><!-- s with hook -->
+      <when state="Acute and Dot" output="ṥ"/>
+      <when state="Dot and Dot Below" output="ṩ"/>
+      <when state="Caron and Dot" output="ṧ"/>
+    </action>
+    <action id="S">
+      <when state="none" next="S"/>
+      <when state="Acute" output="Ś"/>
+      <when state="Circumflex" output="Ŝ"/>
+      <when state="Dot" output="Ṡ"/>
+      <when state="Caron" output="Š"/>
+      <when state="Cedilla" output="Ş"/>
+      <when state="Hook" output="Ʃ"/><!-- for compatibility -->
+      <when state="Comma Below" output="Ș"/>
+      <when state="Dot Below" output="Ṣ"/>
+      <when state="Acute and Dot" output="Ṥ"/>
+      <when state="Dot and Dot Below" output="Ṩ"/>
+      <when state="Caron and Dot" output="Ṧ"/>
+    </action>
+    <action id="t">
+      <when state="none" output="t"/>
+      <when state="Diaeresis" output="ẗ"/>
+      <when state="Dot" output="ṫ"/>
+      <when state="Caron" output="ť"/>
+      <when state="Cedilla" output="ţ"/>
+      <when state="Hook" output="ƭ"/>
+      <when state="Stroke" output="ŧ"/>
+      <when state="Circumflex Below" output="ṱ"/>
+      <when state="Macron Below" output="ṯ"/>
+      <when state="Dot Below" output="ṭ"/>
+      <when state="Comma Below" output="ț"/>
+    </action>
+    <action id="T">
+      <when state="none" output="T"/>
+      <when state="Dot" output="Ṫ"/>
+      <when state="Caron" output="Ť"/>
+      <when state="Cedilla" output="Ţ"/>
+      <when state="Hook" output="Ƭ"/>
+      <when state="Stroke" output="Ŧ"/>
+      <when state="Circumflex Below" output="Ṱ"/>
+      <when state="Macron Below" output="Ṯ"/>
+      <when state="Dot Below" output="Ṭ"/>
+      <when state="Comma Below" output="Ț"/>
+    </action>
+    <action id="v">
+      <when state="none" output="v"/>
+      <when state="Diaeresis" output="ṽ"/>
+      <when state="Number" output="ʌ"/>
+      <when state="Hook" output="ⱱ"/>
+      <when state="Dot Below" output="ṿ"/>
+    </action>
+    <action id="V">
+      <when state="none" output="V"/>
+      <when state="Diaeresis" output="Ṽ"/>
+      <when state="Dot Below" output="Ṿ"/>
+    </action>
+    <action id="w">
+      <when state="none" output="w"/>
+      <when state="Grave" output="ẁ"/>
+      <when state="Acute" output="ẃ"/>
+      <when state="Circumflex" output="ŵ"/>
+      <when state="Diaeresis" output="ẅ"/>
+      <when state="Dot" output="ẇ"/>
+      <when state="Ring" output="ẘ"/>
+      <when state="Hook" output="ⱳ"/>
+      <when state="Number" output="ƿ"/>
+      <when state="Dot Below" output="ẉ"/>
+    </action>
+    <action id="W">
+      <when state="none" output="W"/>
+      <when state="Grave" output="Ẁ"/>
+      <when state="Acute" output="Ẃ"/>
+      <when state="Circumflex" output="Ŵ"/>
+      <when state="Diaeresis" output="Ẅ"/>
+      <when state="Dot" output="Ẇ"/>
+      <when state="Hook" output="Ⱳ"/>
+      <when state="Number" output="Ƿ"/>
+      <when state="Dot Below" output="Ẉ"/>
+    </action>
+    <action id="x">
+      <when state="none" output="x"/>
+      <when state="Diaeresis" output="ẍ"/>
+      <when state="Dot" output="ẋ"/>
+      <when state="c" output="ĉ"/>
+      <when state="C" output="Ĉ"/>
+      <when state="g" output="ĝ"/>
+      <when state="G" output="Ĝ"/>
+      <when state="h" output="ĥ"/>
+      <when state="H" output="Ĥ"/>
+      <when state="j" output="ĵ"/>
+      <when state="J" output="Ĵ"/>
+      <when state="s" output="ŝ"/>
+      <when state="S" output="Ŝ"/>
+      <when state="u" output="ŭ"/>
+      <when state="U" output="Ŭ"/>
+    </action>
+    <action id="X">
+      <when state="none" output="X"/>
+      <when state="Diaeresis" output="Ẍ"/>
+      <when state="Dot" output="Ẋ"/>
+      <when state="c" output="ĉ"/>
+      <when state="C" output="Ĉ"/>
+      <when state="g" output="ĝ"/>
+      <when state="G" output="Ĝ"/>
+      <when state="h" output="ĥ"/>
+      <when state="H" output="Ĥ"/>
+      <when state="j" output="ĵ"/>
+      <when state="J" output="Ĵ"/>
+      <when state="s" output="ŝ"/>
+      <when state="S" output="Ŝ"/>
+      <when state="u" output="ŭ"/>
+      <when state="U" output="Ŭ"/>
+    </action>
+    <action id="y">
+      <when state="none" output="y"/>
+      <when state="Grave" output="ỳ"/>
+      <when state="Acute" output="ý"/>
+      <when state="Circumflex" output="ŷ"/>
+      <when state="Diaeresis" output="ÿ"/>
+      <when state="Macron" output="ȳ"/>
+      <when state="Dot" output="ẏ"/>
+      <when state="Ring" output="ẙ"/>
+      <when state="Hook" output="ƴ"/>
+      <when state="Stroke" output="ɏ"/>
+      <when state="Number" output="ȝ"/>
+      <when state="Dot Below" output="ỵ"/>
+      <when state="Hook Above" output="ỷ"/>
+    </action>
+    <action id="Y">
+      <when state="none" output="Y"/>
+      <when state="Grave" output="Ỳ"/>
+      <when state="Acute" output="Ý"/>
+      <when state="Circumflex" output="Ŷ"/>
+      <when state="Tilde" output="Ỹ"/>
+      <when state="Diaeresis" output="Ÿ"/>
+      <when state="Macron" output="Ȳ"/>
+      <when state="Dot" output="Ẏ"/>
+      <when state="Hook" output="Ƴ"/>
+      <when state="Stroke" output="Ɏ"/>
+      <when state="Number" output="Ȝ"/>
+      <when state="Dot Below" output="Ỵ"/>
+      <when state="Hook Above" output="Ỷ"/>
+    </action>
+    <action id="z">
+      <when state="none" output="z"/>
+      <when state="Acute" output="ź"/>
+      <when state="Circumflex" output="ẑ"/>
+      <when state="Dot" output="ż"/>
+      <when state="Caron" output="ž"/>
+      <when state="Hook" output="ȥ"/>
+      <when state="Stroke" output="ƶ"/>
+      <when state="Number" output="ʒ"/>
+      <when state="Macron Below" output="ẕ"/>
+      <when state="Dot Below" output="ẓ"/>
+    </action>
+    <action id="Z">
+      <when state="none" output="Z"/>
+      <when state="Acute" output="Ź"/>
+      <when state="Circumflex" output="Ẑ"/>
+      <when state="Dot" output="Ż"/>
+      <when state="Caron" output="Ž"/>
+      <when state="Hook" output="Ȥ"/>
+      <when state="Stroke" output="Ƶ"/>
+      <when state="Number" output="Ʒ"/>
+      <when state="Macron Below" output="Ẕ"/>
+      <when state="Dot Below" output="Ẓ"/>
+    </action>
+    <action id="#2">
+      <when state="none" output="2"/>
+      <when state="Stroke" output="ƻ"/>
+      <when state="Number" output="ƨ"/>
+    </action>
+    <action id="#3">
+      <when state="none" output="3"/>
+      <when state="Number" output="ɛ"/>
+    </action>
+    <action id="#5">
+      <when state="none" output="5"/>
+      <when state="Number" output="ƽ"/>
+    </action>
+    <action id="#6">
+      <when state="none" output="6"/>
+      <when state="Number" output="ƅ"/>
+    </action>
+    <action id="#7">
+      <when state="none" output="7"/>
+      <when state="Number" output="⁊"/>
+    </action>
+    <action id="#8">
+      <when state="none" output="8"/>
+      <when state="Number" output="ȣ"/>
+    </action>
+    <action id="@">
+      <when state="none" output="@"/>
+      <when state="Number" output="Ƨ"/>
+    </action>
+    <action id="#">
+      <when state="none" output="#"/>
+      <when state="Number" output="Ɛ"/>
+    </action>
+    <action id="%">
+      <when state="none" output="%"/>
+      <when state="Number" output="Ƽ"/>
+    </action>
+    <action id="^">
+      <when state="none" output="^"/>
+      <when state="Number" output="Ƅ"/>
+    </action>
+    <action id="*">
+      <when state="none" output="*"/>
+      <when state="Number" output="Ȣ"/>
+    </action>
+    <action id="SoftSpace">
+      <when state="none" output="&#x0020;"/>
+      <when state="Grave" output="&#x00A0;&#x0300;"/>
+      <when state="Acute" output="&#x00A0;&#x0301;"/>
+      <when state="Circumflex" output="&#x00A0;&#x0302;"/>
+      <when state="Tilde" output="&#x00A0;&#x0303;"/>
+      <when state="Diaeresis" output="&#x00A0;&#x0308;"/>
+      <when state="Macron" output="&#x00A0;&#x0304;"/>
+      <when state="Breve" output="&#x00A0;&#x0306;"/>
+      <when state="Dot" output="&#x00A0;&#x0307;"/>
+      <when state="Ring" output="&#x00A0;&#x030A;"/>
+      <when state="Caron" output="&#x00A0;&#x030C;"/>
+      <when state="Cedilla" output="&#x00A0;&#x0327;"/>
+      <when state="Ogonek" output="&#x00A0;&#x0328;"/>
+      <when state="Hook" output="&#x0294;"/>
+      <when state="Horn" output="&#x00A0;&#x031B;"/>
+      <when state="Stroke" output="&#x002D;"/>
+      <when state="Number" output="&#x2116;"/>
+      <when state="Inverted Breve" output="&#x00A0;&#x0311;"/>
+      <when state="Circumflex Below" output="&#x00A0;&#x032D;"/>
+      <when state="Tilde Below" output="&#x00A0;&#x0330;"/>
+      <when state="Macron Below" output="&#x00A0;&#x0331;"/>
+      <when state="Dot Below" output="&#x00A0;&#x0323;"/>
+      <when state="Comma Below" output="&#x00A0;&#x0326;"/>
+      <when state="Hook Above" output="&#x00A0;&#x0309;"/>
+      <when state="Double Grave" output="&#x00A0;&#x030F;"/>
+      <when state="Double Acute" output="&#x00A0;&#x030B;"/>
+      <when state="Acute and Dot" output="&#x00A0;&#x0301;&#x0307;"/>
+      <when state="Circumflex and Grave" output="&#x00A0;&#x0302;&#x0300;"/>
+      <when state="Circumflex and Acute" output="&#x00A0;&#x0302;&#x0301;"/>
+      <when state="Circumflex and Tilde" output="&#x00A0;&#x0302;&#x0303;"/>
+      <when state="Circumflex and Dot Below" output="&#x00A0;&#x0302;&#x0323;"/>
+      <when state="Circumflex and Hook Above" output="&#x00A0;&#x0302;&#x0309;"/>
+      <when state="Tilde and Acute" output="&#x00A0;&#x0303;&#x0301;"/>
+      <when state="Tilde and Diaeresis" output="&#x00A0;&#x0303;&#x0308;"/>
+      <when state="Tilde and Macron" output="&#x00A0;&#x0303;&#x0304;"/>
+      <when state="Diaeresis and Grave" output="&#x00A0;&#x0308;&#x0300;"/>
+      <when state="Diaeresis and Acute" output="&#x00A0;&#x0308;&#x0301;"/>
+      <when state="Diaeresis and Macron" output="&#x00A0;&#x0308;&#x0304;"/>
+      <when state="Diaeresis and Caron" output="&#x00A0;&#x0308;&#x030C;"/>
+      <when state="Macron and Grave" output="&#x00A0;&#x0304;&#x0300;"/>
+      <when state="Macron and Acute" output="&#x00A0;&#x0304;&#x0301;"/>
+      <when state="Macron and Diaeresis" output="&#x00A0;&#x0304;&#x0308;"/>
+      <when state="Macron and Dot Below" output="&#x00A0;&#x0304;&#x0323;"/>
+      <when state="Breve and Grave" output="&#x00A0;&#x0306;&#x0300;"/>
+      <when state="Breve and Acute" output="&#x00A0;&#x0306;&#x0301;"/>
+      <when state="Breve and Tilde" output="&#x00A0;&#x0306;&#x0303;"/>
+      <when state="Breve and Dot Below" output="&#x00A0;&#x0306;&#x0323;"/>
+      <when state="Breve and Hook Above" output="&#x00A0;&#x0306;&#x0309;"/>
+      <when state="Dot and Macron" output="&#x00A0;&#x0307;&#x0304;"/>
+      <when state="Dot and Dot Below" output="&#x00A0;&#x0307;&#x0323;"/>
+      <when state="Ring and Acute" output="&#x00A0;&#x030A;&#x0301;"/>
+      <when state="Caron and Dot" output="&#x00A0;&#x030C;&#x0307;"/>
+      <when state="Cedilla and Acute" output="&#x00A0;&#x0327;&#x0301;"/>
+      <when state="Cedilla and Breve" output="&#x00A0;&#x0327;&#x0306;"/>
+      <when state="Ogonek and Macron" output="&#x00A0;&#x0328;&#x0304;"/>
+      <when state="Horn and Grave" output="&#x00A0;&#x031B;&#x0300;"/>
+      <when state="Horn and Acute" output="&#x00A0;&#x031B;&#x0301;"/>
+      <when state="Horn and Tilde" output="&#x00A0;&#x031B;&#x0303;"/>
+      <when state="Horn and Dot Below" output="&#x00A0;&#x031B;&#x0323;"/>
+      <when state="Horn and Hook Above" output="&#x00A0;&#x031B;&#x0309;"/>
+      <when state="Stroke and Acute" output="&#x002D;&#x0301;"/>
+      <when state="Stroke and Hook" output="&#x002D;&#x0294;"/>
+    </action>
+    <action id="HardSpace">
+      <when state="none" output="&#x00A0;"/>
+      <when state="Grave" output="&#x00A0;&#x0300;"/>
+      <when state="Acute" output="&#x00A0;&#x0301;"/>
+      <when state="Circumflex" output="&#x00A0;&#x0302;"/>
+      <when state="Tilde" output="&#x00A0;&#x0303;"/>
+      <when state="Diaeresis" output="&#x00A0;&#x0308;"/>
+      <when state="Macron" output="&#x00A0;&#x0304;"/>
+      <when state="Breve" output="&#x00A0;&#x0306;"/>
+      <when state="Dot" output="&#x00A0;&#x0307;"/>
+      <when state="Ring" output="&#x00A0;&#x030A;"/>
+      <when state="Caron" output="&#x00A0;&#x030C;"/>
+      <when state="Cedilla" output="&#x00A0;&#x0327;"/>
+      <when state="Ogonek" output="&#x00A0;&#x0328;"/>
+      <when state="Hook" output="&#x0294;"/>
+      <when state="Horn" output="&#x00A0;&#x031B;"/>
+      <when state="Stroke" output="&#x002D;"/>
+      <when state="Number" output="&#x2116;"/>
+      <when state="Inverted Breve" output="&#x00A0;&#x0311;"/>
+      <when state="Circumflex Below" output="&#x00A0;&#x032D;"/>
+      <when state="Tilde Below" output="&#x00A0;&#x0330;"/>
+      <when state="Macron Below" output="&#x00A0;&#x0331;"/>
+      <when state="Dot Below" output="&#x00A0;&#x0323;"/>
+      <when state="Comma Below" output="&#x00A0;&#x0326;"/>
+      <when state="Hook Above" output="&#x00A0;&#x0309;"/>
+      <when state="Double Grave" output="&#x00A0;&#x030F;"/>
+      <when state="Double Acute" output="&#x00A0;&#x030B;"/>
+      <when state="Acute and Dot" output="&#x00A0;&#x0301;&#x0307;"/>
+      <when state="Circumflex and Grave" output="&#x00A0;&#x0302;&#x0300;"/>
+      <when state="Circumflex and Acute" output="&#x00A0;&#x0302;&#x0301;"/>
+      <when state="Circumflex and Tilde" output="&#x00A0;&#x0302;&#x0303;"/>
+      <when state="Circumflex and Dot Below" output="&#x00A0;&#x0302;&#x0323;"/>
+      <when state="Circumflex and Hook Above" output="&#x00A0;&#x0302;&#x0309;"/>
+      <when state="Tilde and Acute" output="&#x00A0;&#x0303;&#x0301;"/>
+      <when state="Tilde and Diaeresis" output="&#x00A0;&#x0303;&#x0308;"/>
+      <when state="Tilde and Macron" output="&#x00A0;&#x0303;&#x0304;"/>
+      <when state="Diaeresis and Grave" output="&#x00A0;&#x0308;&#x0300;"/>
+      <when state="Diaeresis and Acute" output="&#x00A0;&#x0308;&#x0301;"/>
+      <when state="Diaeresis and Macron" output="&#x00A0;&#x0308;&#x0304;"/>
+      <when state="Diaeresis and Caron" output="&#x00A0;&#x0308;&#x030C;"/>
+      <when state="Macron and Grave" output="&#x00A0;&#x0304;&#x0300;"/>
+      <when state="Macron and Acute" output="&#x00A0;&#x0304;&#x0301;"/>
+      <when state="Macron and Diaeresis" output="&#x00A0;&#x0304;&#x0308;"/>
+      <when state="Macron and Dot Below" output="&#x00A0;&#x0304;&#x0323;"/>
+      <when state="Breve and Grave" output="&#x00A0;&#x0306;&#x0300;"/>
+      <when state="Breve and Acute" output="&#x00A0;&#x0306;&#x0301;"/>
+      <when state="Breve and Tilde" output="&#x00A0;&#x0306;&#x0303;"/>
+      <when state="Breve and Dot Below" output="&#x00A0;&#x0306;&#x0323;"/>
+      <when state="Breve and Hook Above" output="&#x00A0;&#x0306;&#x0309;"/>
+      <when state="Dot and Macron" output="&#x00A0;&#x0307;&#x0304;"/>
+      <when state="Dot and Dot Below" output="&#x00A0;&#x0307;&#x0323;"/>
+      <when state="Ring and Acute" output="&#x00A0;&#x030A;&#x0301;"/>
+      <when state="Caron and Dot" output="&#x00A0;&#x030C;&#x0307;"/>
+      <when state="Cedilla and Acute" output="&#x00A0;&#x0327;&#x0301;"/>
+      <when state="Cedilla and Breve" output="&#x00A0;&#x0327;&#x0306;"/>
+      <when state="Ogonek and Macron" output="&#x00A0;&#x0328;&#x0304;"/>
+      <when state="Horn and Grave" output="&#x00A0;&#x031B;&#x0300;"/>
+      <when state="Horn and Acute" output="&#x00A0;&#x031B;&#x0301;"/>
+      <when state="Horn and Tilde" output="&#x00A0;&#x031B;&#x0303;"/>
+      <when state="Horn and Dot Below" output="&#x00A0;&#x031B;&#x0323;"/>
+      <when state="Horn and Hook Above" output="&#x00A0;&#x031B;&#x0309;"/>
+      <when state="Stroke and Acute" output="&#x002D;&#x0301;"/>
+      <when state="Stroke and Hook" output="&#x002D;&#x0294;"/>
+    </action>
+    <action id="Tab"><!-- { -->
+      <when state="none" output="&#x0009;"/>
+      <when state="Grave" output="&#x0060;"/>
+      <when state="Acute" output="&#x00B4;"/>
+      <when state="Circumflex" output="&#x02C6;"/>
+      <when state="Tilde" output="&#x02DC;"/>
+      <when state="Diaeresis" output="&#x00A8;"/>
+      <when state="Macron" output="&#x00AF;"/>
+      <when state="Breve" output="&#x02D8;"/>
+      <when state="Dot" output="&#x02D9;"/>
+      <when state="Ring" output="&#x02DA;"/>
+      <when state="Caron" output="&#x02C7;"/>
+      <when state="Cedilla" output="&#x00B8;"/>
+      <when state="Ogonek" output="&#x02DB;"/>
+      <when state="Hook" output="&#x0294;"/>
+      <when state="Horn" output="&#x02BC;"/>
+      <when state="Stroke" output="&#x002D;"/>
+      <when state="Number" output="&#x2116;"/>
+      <when state="Inverted Breve" output="&#x00A0;&#x0311;"/>
+      <when state="Circumflex Below" output="&#xA788;"/>
+      <when state="Tilde Below" output="&#x02F7;"/>
+      <when state="Macron Below" output="&#x02CD;"/>
+      <when state="Dot Below" output="&#x00A0;&#x0323;"/>
+      <when state="Comma Below" output="&#x00A0;&#x0326;"/>
+      <when state="Hook Above" output="&#x02C0;"/>
+      <when state="Double Grave" output="&#x0060;&#x0060;"/>
+      <when state="Double Acute" output="&#x00B4;&#x00B4;"/>
+      <when state="Acute and Dot" output="&#x00B4;&#x02D9;"/>
+      <when state="Circumflex and Grave" output="&#x02C6;&#x0060;"/>
+      <when state="Circumflex and Acute" output="&#x02C6;&#x00B4;"/>
+      <when state="Circumflex and Tilde" output="&#x02C6;&#x02DC;"/>
+      <when state="Circumflex and Dot Below" output="&#x02C6;&#x00A0;&#x0323;"/>
+      <when state="Circumflex and Hook Above" output="&#x02C6;&#x02C0;"/>
+      <when state="Tilde and Acute" output="&#x02DC;&#x00B4;"/>
+      <when state="Tilde and Diaeresis" output="&#x02DC;&#x00A8;"/>
+      <when state="Tilde and Macron" output="&#x02DC;&#x00AF;"/>
+      <when state="Diaeresis and Grave" output="&#x00A8;&#x0060;"/>
+      <when state="Diaeresis and Acute" output="&#x00A8;&#x00B4;"/>
+      <when state="Diaeresis and Macron" output="&#x00A8;&#x00AF;"/>
+      <when state="Diaeresis and Caron" output="&#x00A8;&#x02C7;"/>
+      <when state="Macron and Grave" output="&#x00AF;&#x0060;"/>
+      <when state="Macron and Acute" output="&#x00AF;&#x00B4;"/>
+      <when state="Macron and Diaeresis" output="&#x00AF;&#x00A8;"/>
+      <when state="Macron and Dot Below" output="&#x00AF;&#x00A0;&#x0323;"/>
+      <when state="Breve and Grave" output="&#x02D8;&#x0060;"/>
+      <when state="Breve and Acute" output="&#x02D8;&#x00B4;"/>
+      <when state="Breve and Tilde" output="&#x02D8;&#x02DC;"/>
+      <when state="Breve and Dot Below" output="&#x02D8;&#x00A0;&#x0323;"/>
+      <when state="Breve and Hook Above" output="&#x02D8;&#x02C0;"/>
+      <when state="Dot and Macron" output="&#x02D9;&#x00AF;"/>
+      <when state="Dot and Dot Below" output="&#x02D9;&#x00A0;&#x0323;"/>
+      <when state="Ring and Acute" output="&#x02DA;&#x00B4;"/>
+      <when state="Caron and Dot" output="&#x02C7;&#x02D9;"/>
+      <when state="Cedilla and Acute" output="&#x00B8;&#x00B4;"/>
+      <when state="Cedilla and Breve" output="&#x00B8;&#x02D8;"/>
+      <when state="Ogonek and Macron" output="&#x02DB;&#x00AF;"/>
+      <when state="Horn and Grave" output="&#x02BC;&#x0060;"/>
+      <when state="Horn and Acute" output="&#x02BC;&#x00B4;"/>
+      <when state="Horn and Tilde" output="&#x02BC;&#x02DC;"/>
+      <when state="Horn and Dot Below" output="&#x02BC;&#x00A0;&#x0323;"/>
+      <when state="Horn and Hook Above" output="&#x02BC;&#x02C0;"/>
+      <when state="Stroke and Acute" output="&#x002D;&#x00B4;"/>
+      <when state="Stroke and Hook" output="&#x002D;&#x0294;"/>
+      <when state="c" output="c"/>
+      <when state="C" output="C"/>
+      <when state="g" output="g"/>
+      <when state="G" output="G"/>
+      <when state="h" output="h"/>
+      <when state="H" output="H"/>
+      <when state="j" output="j"/>
+      <when state="J" output="J"/>
+      <when state="s" output="s"/>
+      <when state="S" output="S"/>
+      <when state="u" output="u"/>
+      <when state="U" output="U"/>
+    </action><!-- } -->
+  </actions><!-- } -->
+
+  <!--
+    - The <terminators> element contains a series of <when> elements, which
+    - specify what to do when no action matches the current state. Each <when>
+    - element may specify only a single state and an output string. A next
+    - state may not be specified. If there is no <when> element for
+    - a particular state, the default is to return to the base (default) state.
+    -->
+  <terminators><!-- { -->
+    <when state="Grave" output="&#x0060;"/>
+    <when state="Acute" output="&#x00B4;"/>
+    <when state="Circumflex" output="&#x02C6;"/>
+    <when state="Tilde" output="&#x02DC;"/>
+    <when state="Diaeresis" output="&#x00A8;"/>
+    <when state="Macron" output="&#x00AF;"/>
+    <when state="Breve" output="&#x02D8;"/>
+    <when state="Dot" output="&#x02D9;"/>
+    <when state="Ring" output="&#x02DA;"/>
+    <when state="Caron" output="&#x02C7;"/>
+    <when state="Cedilla" output="&#x00B8;"/>
+    <when state="Ogonek" output="&#x02DB;"/>
+    <when state="Hook" output="&#x0294;"/>
+    <when state="Horn" output="&#x02BC;"/>
+    <when state="Stroke" output="&#x002D;"/>
+    <when state="Number" output="&#x2116;"/>
+    <when state="Inverted Breve" output="&#x00A0;&#x0311;"/>
+    <when state="Circumflex Below" output="&#xA788;"/>
+    <when state="Tilde Below" output="&#x02F7;"/>
+    <when state="Macron Below" output="&#x02CD;"/>
+    <when state="Dot Below" output="&#x00A0;&#x0323;"/>
+    <when state="Comma Below" output="&#x00A0;&#x0326;"/>
+    <when state="Hook Above" output="&#x02C0;"/>
+    <when state="Double Grave" output="&#x0060;&#x0060;"/>
+    <when state="Double Acute" output="&#x00B4;&#x00B4;"/>
+    <when state="Acute and Dot" output="&#x00B4;&#x02D9;"/>
+    <when state="Circumflex and Grave" output="&#x02C6;&#x0060;"/>
+    <when state="Circumflex and Acute" output="&#x02C6;&#x00B4;"/>
+    <when state="Circumflex and Tilde" output="&#x02C6;&#x02DC;"/>
+    <when state="Circumflex and Dot Below" output="&#x02C6;&#x00A0;&#x0323;"/>
+    <when state="Circumflex and Hook Above" output="&#x02C6;&#x02C0;"/>
+    <when state="Tilde and Acute" output="&#x02DC;&#x00B4;"/>
+    <when state="Tilde and Diaeresis" output="&#x02DC;&#x00A8;"/>
+    <when state="Tilde and Macron" output="&#x02DC;&#x00AF;"/>
+    <when state="Diaeresis and Grave" output="&#x00A8;&#x0060;"/>
+    <when state="Diaeresis and Acute" output="&#x00A8;&#x00B4;"/>
+    <when state="Diaeresis and Macron" output="&#x00A8;&#x00AF;"/>
+    <when state="Diaeresis and Caron" output="&#x00A8;&#x02C7;"/>
+    <when state="Macron and Grave" output="&#x00AF;&#x0060;"/>
+    <when state="Macron and Acute" output="&#x00AF;&#x00B4;"/>
+    <when state="Macron and Diaeresis" output="&#x00AF;&#x00A8;"/>
+    <when state="Macron and Dot Below" output="&#x00AF;&#x00A0;&#x0323;"/>
+    <when state="Breve and Grave" output="&#x02D8;&#x0060;"/>
+    <when state="Breve and Acute" output="&#x02D8;&#x00B4;"/>
+    <when state="Breve and Tilde" output="&#x02D8;&#x02DC;"/>
+    <when state="Breve and Dot Below" output="&#x02D8;&#x00A0;&#x0323;"/>
+    <when state="Breve and Hook Above" output="&#x02D8;&#x02C0;"/>
+    <when state="Dot and Macron" output="&#x02D9;&#x00AF;"/>
+    <when state="Dot and Dot Below" output="&#x02D9;&#x00A0;&#x0323;"/>
+    <when state="Ring and Acute" output="&#x02DA;&#x00B4;"/>
+    <when state="Caron and Dot" output="&#x02C7;&#x02D9;"/>
+    <when state="Cedilla and Acute" output="&#x00B8;&#x00B4;"/>
+    <when state="Cedilla and Breve" output="&#x00B8;&#x02D8;"/>
+    <when state="Ogonek and Macron" output="&#x02DB;&#x00AF;"/>
+    <when state="Horn and Grave" output="&#x02BC;&#x0060;"/>
+    <when state="Horn and Acute" output="&#x02BC;&#x00B4;"/>
+    <when state="Horn and Tilde" output="&#x02BC;&#x02DC;"/>
+    <when state="Horn and Dot Below" output="&#x02BC;&#x00A0;&#x0323;"/>
+    <when state="Horn and Hook Above" output="&#x02BC;&#x02C0;"/>
+    <when state="Stroke and Acute" output="&#x002D;&#x00B4;"/>
+    <when state="Stroke and Hook" output="&#x002D;&#x0294;"/>
+    <when state="c" output="c"/>
+    <when state="C" output="C"/>
+    <when state="g" output="g"/>
+    <when state="G" output="G"/>
+    <when state="h" output="h"/>
+    <when state="H" output="H"/>
+    <when state="j" output="j"/>
+    <when state="J" output="J"/>
+    <when state="s" output="s"/>
+    <when state="S" output="S"/>
+    <when state="u" output="u"/>
+    <when state="U" output="U"/>
+  </terminators><!-- } -->
+
+</keyboard><!-- } -->

@@ -9,7 +9,7 @@
     <key>CFBundleName</key>
     <string>Esperanto</string>
     <key>CFBundleVersion</key>
-    <string>2.0.0</string>
+    <string>3.0.0</string>
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleDevelopmentRegion</key>
@@ -31,6 +31,13 @@
     <dict>
       <key>TISInputSourceID</key>
       <string>jakwings.keylayout.Esperanto_UK</string>
+      <key>TISIntendedLanguage</key>
+      <string>eo</string>
+    </dict>
+    <key>KLInfo_Esperanto_US_Extended</key>
+    <dict>
+      <key>TISInputSourceID</key>
+      <string>jakwings.keylayout.Esperanto_US_Extended</string>
       <key>TISIntendedLanguage</key>
       <string>eo</string>
     </dict>
