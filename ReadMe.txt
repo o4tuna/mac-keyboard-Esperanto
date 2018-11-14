@@ -8,19 +8,29 @@ Homepage:
 
 Installation:
 
-  Just drop Esperanto.bundle in the directory ~/Library/Keyboard Layouts
-  "~" is your home directory. (e.g. /Users/ada)
+  Just copy the file named Esperanto.bundle into your "~/Library/Keyboard Layouts" directory.
+  ("~" is an alias for your home directory, so the explicit destination directory for a  
+  user named "ada" would be "/Users/ada".)
+  
+  If you are using Finder to perform the copy, note that holding down your keyboard's 
+  [option] key while hovering your mouse pointer over the "Go" option in Finder's menu bar
+  will reveal the normally-hidden "Library" directory.
 
   If this is not your first time to install these keyboard layouts, remove the
-  old layouts first. Next, logout and login again, and reinstall.
+  old layouts first. Next, logout and login again. Then reinstall.
 
-  Finally, check the system preferences and add this layout. Enjoy! :-)
+  Finally, use System Preferences to add this layout . . .
+  System Preferences -> Keyboard -> "Input Sources" tab
+
+  Enjoy! :-)
 
 
 Features:
 
-  * Based on multiplue layouts of the English Apple keyboards.
+  * Based on multiple layouts of the English Apple keyboards.
+  
   * More latin letters from the combinations of accents and letters.
+  
   * Support the x-system:
       c + x/X = ĉ, C + x/X = Ĉ
       g + x/X = ĝ, G + x/X = Ĝ
@@ -28,6 +38,7 @@ Features:
       j + x/X = ĵ, J + x/X = Ĵ
       s + x/X = ŝ, S + x/X = Ŝ
       u + x/X = ŭ, U + x/X = Ŭ
+      
   * Use ESC or Tab or irrelevant keys to cancel any incomplete combination:
       c + Tab = c, C + Tab = C
       g + Tab = g, G + Tab = G
